@@ -22,7 +22,7 @@
 					</tr>
 					<tr>
 						<th></th>
-						<td><button type="submit" value="로그인" />로그인
+						<td><button button class="btn btn-ghost btn-sm" type="submit" value="로그인" />로그인
 							</button></td>
 					</tr>
 				</tbody>
@@ -30,8 +30,8 @@
 		</form>
 	</div>
 
-	<div class="container mx-auto btns">
-		<button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>
+	<div class="container mx-auto btns flex justify-end">
+		<button class="btn-text-link btn btn-outline btn-sm"" type="button" onclick="history.back();">뒤로가기</button>
 	</div>
 
 </section>

@@ -9,7 +9,10 @@
 
 <!-- 테일윈드 불러오기 -->
 <!-- 노말라이즈, 라이브러리까지 -->
-<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
+
+<!-- 데이지 UI -->
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css" rel="stylesheet" type="text/css" />
 
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
@@ -33,8 +36,13 @@
 					</a>
 				</li>
 				<li class="hover:underline">
-					<a class="h-full px-3 flex items-center" href="/usr/article/list">
-						<span>LIST</span>
+					<a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1">
+						<span>NOTICE</span>
+					</a>
+				</li>
+				<li class="hover:underline">
+					<a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=2">
+						<span>FREE</span>
 					</a>
 				</li>
 				<c:if test="${!rq.isLogined()}">
@@ -48,6 +56,11 @@
 					<li class="hover:underline">
 						<a class="h-full px-3 flex items-center" href="/usr/member/doLogout">
 							<span>LOGOUT</span>
+						</a>
+					</li>					
+					<li class="hover:underline">
+						<a class="h-full px-3 flex items-center" href="/usr/article/write">
+							<span>WRITE</span>
 						</a>
 					</li>
 				</c:if>

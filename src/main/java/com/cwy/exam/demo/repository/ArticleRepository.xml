@@ -13,18 +13,28 @@
 		`body` = #{body}
 	</insert>
 
-	<select id="getArticles" resultType="Article">
-		SELECT A.*, M.nickname AS
+<!-- 	<select id="getArticles" resultType="Article">
+		SELECT A.*, M.name AS
 		extra__writerName
 		FROM article AS A
 		LEFT JOIN `member` AS M
 		ON A.memberId
 		= M.id
 		ORDER BY A.id DESC
+	</select> -->
+	
+	<!-- 공지사항 글 보여줘 -->
+	<select id="getArticles" resultType="Article">
+		SELECT A.*, M.name AS extra_writerName
+		FROM article AS A
+		LEFT JOIN `member` AS M
+		ON A.memberId = M.id
+		WHERE boardId = 1 ORDER BY id DESC;
 	</select>
+	
 
 	<select id="getForPrintArticle" resultType="Article">
-		SELECT A.*, M.nickname AS extra__writerName
+		SELECT A.*, M.name AS extra__writerName
 		FROM article AS A
 		LEFT JOIN `member` AS M
 		ON A.memberId = M.id

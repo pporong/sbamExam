@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="ARTICLE LIST" />
+<c:set var="pageTitle" value="${board.name } 게시판" />
 <%@ include file="../common/head.jspf"%>
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
-		<div class="table-box-type-1">
-			<table>
+		<div class="table-box-type-1 overflow-x-auto">
+			  <table class="table table-compact w-full">
 				<colgroup>
 					<col width="80" />
 					<col width="140" />
@@ -14,7 +14,7 @@
 					<col width="140" />
 				</colgroup>
 				<thead>
-					<tr>
+					<tr class="text-indigo-700">
 						<th>번호</th>
 						<th>날짜</th>
 						<th>제목</th>
@@ -25,7 +25,7 @@
 				<tbody>
 					<c:forEach var="article" items="${articles }">
 						<tr>
-							<td>${article.id}</td>
+							<td  class="text-green-600">${article.id}</td>
 							<td>${article.regDate.substring(2,16)}</td>
 							<td><a class="hover:underline" href="../article/detail?id=${article.id}">${article.title}</a></td>
 							<td>${article.extra__writerName}</td>

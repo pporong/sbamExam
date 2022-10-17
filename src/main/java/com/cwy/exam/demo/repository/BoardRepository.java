@@ -9,13 +9,12 @@ import com.cwy.exam.demo.vo.Board;
 public interface BoardRepository {
 
 	@Select(
-			"""
+			"""		
 			SELECT * FROM board AS B 
 			WHERE B.id = #{id}
-			and B.delStatus = 0			
+			AND B.delStatus = 0
 			"""
 			)
 	public Board getBoardById(int id);
-
 	
 }

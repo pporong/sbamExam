@@ -6,14 +6,14 @@
 	<insert id="writeArticle">
 		INSERT INTO article
 		SET regDate = NOW(),
-		updateDate =
-		NOW(),
+		updateDate =NOW(),
 		memberId = #{memberId},
+		boardId = 2,
 		title = #{title},
 		`body` = #{body}
 	</insert>
 
-<!-- 	<select id="getArticles" resultType="Article">
+<!--  	<select id="getArticles" resultType="Article">
 		SELECT A.*, M.name AS
 		extra__writerName
 		FROM article AS A
@@ -21,18 +21,24 @@
 		ON A.memberId
 		= M.id
 		ORDER BY A.id DESC
-	</select> -->
+	</select>  -->
 	
-	<!-- 공지사항 글 보여줘 -->
 	<select id="getArticles" resultType="Article">
-		SELECT A.*, M.name AS extra_writerName
+		SELECT A.*, M.name AS extra__writerName FROM article AS A
+		LEFT JOIN `member` AS M ON A.memberId = M.id
+		WHERE 1
+		<if test ="boardId != 0"> AND A.boardId = #{boardId} </if>
+		ORDER BY A.id DESC;
+	</select>
+	
+	<select id="getForPrintFreeArticles" resultType="Article">
+		SELECT A.*, M.name AS extra__writerName
 		FROM article AS A
 		LEFT JOIN `member` AS M
 		ON A.memberId = M.id
-		WHERE boardId = 1 ORDER BY id DESC;
+		WHERE boardId = 2 ORDER BY A.id DESC;
 	</select>
 	
-
 	<select id="getForPrintArticle" resultType="Article">
 		SELECT A.*, M.name AS extra__writerName
 		FROM article AS A
@@ -41,6 +47,8 @@
 		WHERE A.id
 		= #{id}
 	</select>
+	
+
 
 	<delete id="deleteArticle">
 		DELETE FROM article

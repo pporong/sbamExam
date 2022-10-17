@@ -16,6 +16,4 @@ public class Board {
 	private String body;
 	private boolean delStatus;
 	private String delDate;
-	
-
 }

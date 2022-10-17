@@ -26,12 +26,6 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	@Autowired
 	private BoardService boardService;
-	
-	/*
-	 * public UsrArticleController(ArticleService articleService, BoardService
-	 * boardService) { this.articleService = articleService; this.boardService =
-	 * boardService; }
-	 */
 
 	// 액션메서드
 	@RequestMapping("/usr/article/doWrite")
@@ -66,12 +60,15 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/list")
 	public String showList(HttpServletRequest req, Model model, int boardId) {
-		
-		Board board = boardService.getBoardById(boardId);
-		
 		Rq rq = (Rq) req.getAttribute("rq");
+				
+		Board board = boardService.getBoardById(boardId);
 
-		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
+		if(board == null) {
+			return rq.jsHistoryBackOnView("존재하지 않는 게시판입니다.");
+		} 
+		
+		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId);
 
 		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);

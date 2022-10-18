@@ -6,11 +6,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import com.cwy.exam.demo.service.MemberService;
 import com.cwy.exam.demo.util.Ut;
 
 import lombok.Getter;
 
+@Component
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
 	@Getter
 	private boolean isLogined;
@@ -18,7 +24,7 @@ public class Rq {
 	private int loginedMemberId;
 	@Getter
 	private Member loginedMember;
-
+	
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
@@ -43,6 +49,8 @@ public class Rq {
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
+		
+		this.req.setAttribute("rq", this);
 	}
 
 	public void printHistoryBackJs(String msg) {
@@ -82,5 +90,9 @@ public class Rq {
 
 	public String jsReplace(String msg, String uri) {
 		return Ut.jsReplace(msg, uri);
+	}
+
+	public void initOnBeforeActionInterceptor() {
+
 	}
 }

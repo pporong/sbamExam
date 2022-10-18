@@ -14,15 +14,6 @@ public interface ArticleRepository {
 
 	public Article getForPrintArticle(int id);
 
-//	@Select ("""
-//		<script>
-//			SELECT A.*, M.name AS extra__writerName FROM article AS A
-//			LEFT JOIN `member` AS M ON A.memberId = M.id
-//			WHERE 1
-//			<if test ="boardId != 0"> AND A.boardId = #{boardId} </if>
-//			ORDER BY A.id DESC;
-//		</script>
-//				""")
 	public List<Article> getArticles(int boardId);
 
 	public void deleteArticle(int id);
@@ -32,5 +23,17 @@ public interface ArticleRepository {
 	public int getLastInsertId();
 
 	public List<Article> getForPrintFreeArticles();
+
+	@Select("""
+			<script>
+			SELECT COUNT(*) AS cnt
+			FROM article AS A
+			WHERE 1
+			<if test="boardId != 0">
+				AND A.boardId = #{boardId}
+			</if>
+			</script>
+							""")
+	public int getArticlesCount(int boardId);
 
 }

@@ -8,7 +8,7 @@
 		SET regDate = NOW(),
 		updateDate =NOW(),
 		memberId = #{memberId},
-		boardId = 2,
+		boardId = #{boardId},
 		title = #{title},
 		`body` = #{body}
 	</insert>

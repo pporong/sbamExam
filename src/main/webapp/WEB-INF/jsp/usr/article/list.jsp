@@ -4,7 +4,8 @@
 <%@ include file="../common/head.jspf"%>
 
 <%
-
+int cPage = (int)request.getAttribute("page");
+int totalPage = (int)request.getAttribute("totalPage");
 %>   
 
 <section class="mt-8 text-xl">
@@ -41,8 +42,7 @@
 			</table>
  		
  		<div class="page">
-			
- 		
+
  		</div>
 		
 		

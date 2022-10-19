@@ -8,7 +8,28 @@
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
-		<div>총 게시물 수 ${articlesCount } 개</div>
+		<div class="list_nav flex justify-between">
+			<div>총 게시물 수 ${articlesCount } 개</div>
+				<div class="search-box">
+				<form method="post" name="search" action="searchlist.jsp">
+					<table class="pull-right">
+						<tr>
+							<td>
+								<select class="form-control" name="searchField">
+										<option value="0">게시판 선택</option>
+										<option value="1">공지사항</option>
+										<option value="2">자유게시판</option>
+								</select>
+							</td>
+								<td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
+								<td><button type="submit" class="btn btn-success btn-sm">검색</button></td>
+						</tr>
+	
+					</table>
+				</form>	
+			</div>
+		</div>
+
 		<div class="table-box-type-1 overflow-x-auto">
 			  <table class="table table-compact w-full">
 				<colgroup>
@@ -29,7 +50,7 @@
 				<tbody>
 					<c:forEach var="article" items="${articles }">
 						<tr>
-							<td  class="text-green-600">${article.id}</td>
+							<td class="text-green-600">${article.id}</td>
 							<td>${article.regDate.substring(2,16)}</td>
 							<td><a class="hover:underline" href="../article/detail?id=${article.id}">${article.title}</a></td>
 							<td>${article.extra__writerName}</td>

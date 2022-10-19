@@ -17,6 +17,10 @@
 						<td class="text-green-600">${article.id }</td>
 					</tr>
 					<tr>
+						<th class="text-indigo-700">게시판</th>
+						<td class="">${article.boardId }</td>
+					</tr>
+					<tr>
 						<th class="text-indigo-700">작성날짜</th>
 						<td>${article.regDate }</td>
 					</tr>

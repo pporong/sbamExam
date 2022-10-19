@@ -73,7 +73,7 @@ public class UsrArticleController {
 		
 		// 한 페이지당 글 intemInAPage 갯수
 		
-		int pagesCount = (int) Math.ceil(articlesCount / itemsInAPage);
+		int pagesCount = (int) Math.ceil((double) articlesCount / itemsInAPage);
 		
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId, page, itemsInAPage);
 

@@ -41,11 +41,24 @@
 			
  		<div class="page-menu flex justify-center">
 	 		<div class="btn-group mx-0 my-10 grid grid-cols-2">
-	 		<button class="btn btn-outline btn-sm"> 이전 </button>
-	 		<c:forEach begin="1" end="${pagesCount }" var="i">
-	 		  <a href="?page=${i}" class="btn btn-sm ${page == i ? 'btn-active' : '' }">${i}</a>
-	 		</c:forEach>
-	 		<button class="btn btn-outline btn-sm"> 다음 </button>
+				<c:set var="pageMenuLen" value="6" />
+				<c:set var="startPage" value="${page - pageMenuLen >= 1 ? page- pageMenuLen : 1}" />
+				<c:set var="endPage" value="${page + pageMenuLen <= pagesCount ? page + pageMenuLen : pagesCount}" />
+				<c:if test="${startPage > 1}">
+					<a class="btn btn-sm" href="?page=1&boardId=${boardId }">1</a>
+					<c:if test="${startPage > 2}">
+						<a class="btn btn-sm btn-disabled">...</a>
+					</c:if>
+				</c:if>
+				<c:forEach begin="${startPage }" end="${endPage }" var="i">
+					<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i }&boardId=${boardId }">${i }</a>
+				</c:forEach>
+				<c:if test="${endPage < pagesCount}">
+					<c:if test="${endPage < pagesCount - 1}">
+						<a class="btn btn-sm btn-disabled">...</a>
+					</c:if>
+					<a class="btn btn-sm" href="?page=${pagesCount }&boardId=${boardId }">${pagesCount }</a>
+				</c:if>
 
 			</div>
 		</div>

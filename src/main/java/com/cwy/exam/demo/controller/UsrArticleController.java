@@ -2,8 +2,6 @@ package com.cwy.exam.demo.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +14,7 @@ import com.cwy.exam.demo.service.BoardService;
 import com.cwy.exam.demo.util.Ut;
 import com.cwy.exam.demo.vo.Article;
 import com.cwy.exam.demo.vo.Board;
+import com.cwy.exam.demo.vo.Pagination;
 import com.cwy.exam.demo.vo.ResultData;
 import com.cwy.exam.demo.vo.Rq;
 
@@ -78,6 +77,7 @@ public class UsrArticleController {
 		model.addAttribute("board", board);
 		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("articles", articles);
+        
 
 		return "usr/article/list";
 	}

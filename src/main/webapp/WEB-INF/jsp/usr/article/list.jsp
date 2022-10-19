@@ -4,8 +4,6 @@
 <%@ include file="../common/head.jspf"%>
 
 <%
-int cPage = (int)request.getAttribute("page");
-int totalPage = (int)request.getAttribute("totalPage");
 %>   
 
 <section class="mt-8 text-xl">
@@ -40,11 +38,17 @@ int totalPage = (int)request.getAttribute("totalPage");
 				</tbody>
 
 			</table>
- 		
- 		<div class="page">
+			
+ 		<div class="page-menu flex justify-center">
+	 		<div class="btn-group mx-0 my-10 grid grid-cols-2">
+	 		<button class="btn btn-outline btn-sm"> 이전 </button>
+	 		<c:forEach begin="1" end="10" var="i">
+	 		  <a href="?page=${i}" class="btn btn-sm ${param.page == i ? 'btn-active' : '' }">${i}</a>
+	 		</c:forEach>
+	 		<button class="btn btn-outline btn-sm"> 다음 </button>
 
- 		</div>
-		
+			</div>
+		</div>
 		
 	</div>
 </section>

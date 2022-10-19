@@ -42,8 +42,8 @@
  		<div class="page-menu flex justify-center">
 	 		<div class="btn-group mx-0 my-10 grid grid-cols-2">
 	 		<button class="btn btn-outline btn-sm"> 이전 </button>
-	 		<c:forEach begin="1" end="10" var="i">
-	 		  <a href="?page=${i}" class="btn btn-sm ${param.page == i ? 'btn-active' : '' }">${i}</a>
+	 		<c:forEach begin="1" end="${pagesCount }" var="i">
+	 		  <a href="?page=${i}" class="btn btn-sm ${page == i ? 'btn-active' : '' }">${i}</a>
 	 		</c:forEach>
 	 		<button class="btn btn-outline btn-sm"> 다음 </button>
 

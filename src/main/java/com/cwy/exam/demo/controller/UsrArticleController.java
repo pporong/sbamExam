@@ -14,7 +14,6 @@ import com.cwy.exam.demo.service.BoardService;
 import com.cwy.exam.demo.util.Ut;
 import com.cwy.exam.demo.vo.Article;
 import com.cwy.exam.demo.vo.Board;
-import com.cwy.exam.demo.vo.Pagination;
 import com.cwy.exam.demo.vo.ResultData;
 import com.cwy.exam.demo.vo.Rq;
 
@@ -70,12 +69,19 @@ public class UsrArticleController {
 		
 		int articlesCount = articleService.getArticlesCount(boardId);
 		
-		int itemsInAPage = 20;
+		int itemsInAPage = 15;
+		
+		// 한 페이지당 글 intemInAPage 갯수
+		
+		int pagesCount = (int) Math.ceil(articlesCount / itemsInAPage);
 		
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId, page, itemsInAPage);
 
 		model.addAttribute("board", board);
+		model.addAttribute("boardId", boardId);
+		model.addAttribute("page", page);
 		model.addAttribute("articlesCount", articlesCount);
+		model.addAttribute("pagesCount", pagesCount);
 		model.addAttribute("articles", articles);
         
 

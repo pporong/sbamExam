@@ -11,20 +11,32 @@
 		<div class="list_nav flex justify-between">
 			<div>총 게시물 수 ${articlesCount } 개</div>
 				<div class="search-box">
-				<form method="post" name="search" action="searchlist.jsp">
+				<form method="get" name="search" 
+				action="../article/list?boardId=${boardId }
+						&searchKeywordTypeCode=${searchKeywordTypeCode}&searchKeyword=${searchKeyword}">
 					<table class="pull-right">
 						<tr>
 							<td>
-								<select class="form-control" name="searchField">
-										<option value="0">게시판 선택</option>
-										<option value="1">공지사항</option>
-										<option value="2">자유게시판</option>
+								<select class="form-control text-center" name="boardId">
+									<option value="1"> 게시판 선택 </option>
+									<option value="1">공 지 사 항</option>
+									<option value="2">자 유 게 시 판</option>
 								</select>
 							</td>
-								<td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
-								<td><button type="submit" class="btn btn-success btn-sm">검색</button></td>
+							<td>
+								<select class="form-control text-center" name="searchKeywordTypeCode">
+										<option value="title, body">검색 선택</option>
+										<option value="title"> 제목</option>
+										<option value="body"> 내용</option>
+								</select>
+							</td>
+								<td><input class="text-center" type="text" class="form-control" placeholder="검색어 입력" name="searchKeyword" maxlength="100"></td>
+								<td><button type="submit" class="btn btn-active btn-sm">검색</button></td>
 						</tr>
-	
+						<c:if test="searchKeyword.size() == 0">
+							
+						</c:if>
+						
 					</table>
 				</form>	
 			</div>
@@ -65,20 +77,25 @@
 				<c:set var="pageMenuLen" value="6" />
 				<c:set var="startPage" value="${page - pageMenuLen >= 1 ? page- pageMenuLen : 1}" />
 				<c:set var="endPage" value="${page + pageMenuLen <= pagesCount ? page + pageMenuLen : pagesCount}" />
+				
+				<c:set var="pageBaseUri" value="?boardId=${boardId }" />
+				<c:set var="pageBaseUri" value="${pageBaseUri }&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
+				<c:set var="pageBaseUri" value="${pageBaseUri }&searchKeyword=${param.searchKeyword}" />
+				
 				<c:if test="${startPage > 1}">
-					<a class="btn btn-sm" href="?page=1&boardId=${boardId }">1</a>
+					<a class="btn btn-sm" href="${pageBaseUri }&page=1">1</a>
 					<c:if test="${startPage > 2}">
 						<a class="btn btn-sm btn-disabled">...</a>
 					</c:if>
 				</c:if>
 				<c:forEach begin="${startPage }" end="${endPage }" var="i">
-					<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i }&boardId=${boardId }">${i }</a>
+					<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="${pageBaseUri }&page=${i }">${i }</a>
 				</c:forEach>
 				<c:if test="${endPage < pagesCount}">
 					<c:if test="${endPage < pagesCount - 1}">
 						<a class="btn btn-sm btn-disabled">...</a>
 					</c:if>
-					<a class="btn btn-sm" href="?page=${pagesCount }&boardId=${boardId }">${pagesCount }</a>
+					<a class="btn btn-sm" href="${pageBaseUri }&page=${pagesCount }">${pagesCount }</a>
 				</c:if>
 
 			</div>

@@ -9,28 +9,32 @@
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="list_nav flex justify-between">
-			<div>총 게시물 수 ${articlesCount } 개</div>
+			<div class="flex">
+				<div> 게시물 갯수 : <span class="badge"> ${articlesCount } 개</span></div>
+				<div class="flex-grow"></div>
+			</div>
 				<div class="search-box">
 				<form method="get" name="search" 
 				action="../article/list?boardId=${boardId }
 						&searchKeywordTypeCode=${searchKeywordTypeCode}&searchKeyword=${searchKeyword}">
-					<table class="pull-right">
+					<table class="">
 						<tr>
 							<td>
-								<select class="form-control text-center" name="boardId">
-									<option value="1"> 게시판 선택 </option>
-									<option value="1">공 지 사 항</option>
+								<select class="text-center" name="boardId" data-value="${param.boardId}">
+									<option value="disabled"> 게시판 선택 </option>
+									<option  value="1">공 지 사 항</option>
 									<option value="2">자 유 게 시 판</option>
 								</select>
 							</td>
 							<td>
-								<select class="form-control text-center" name="searchKeywordTypeCode">
-										<option value="title, body">검색 선택</option>
+								<select class="text-center" name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode}">
+										<option value="disabled">검색 선택</option>
 										<option value="title"> 제목</option>
 										<option value="body"> 내용</option>
+										<option value="title, body">제목 + 내용</option>
 								</select>
 							</td>
-								<td><input class="text-center" type="text" class="form-control" placeholder="검색어 입력" name="searchKeyword" maxlength="100"></td>
+								<td><input class="text-center" type="text" placeholder="검색어 입력" name="searchKeyword" maxlength="30" value="${param.searchKeyword}"></td>
 								<td><button type="submit" class="btn btn-active btn-sm">검색</button></td>
 						</tr>
 						<c:if test="searchKeyword.size() == 0">

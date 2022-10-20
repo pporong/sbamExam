@@ -18,7 +18,11 @@
 					</tr>
 					<tr>
 						<th class="text-indigo-700">게시판</th>
-						<td class="">${article.boardId }</td>
+						<td class="">${article.boardId}</td>
+					</tr>
+					<tr>
+						<th class="text-indigo-700">조회수</th>
+						<td>${article.hitCount }</td>
 					</tr>
 					<tr>
 						<th class="text-indigo-700">작성날짜</th>

@@ -35,7 +35,7 @@
 								</select>
 							</td>
 								<td><input class="text-center" type="text" placeholder="검색어 입력" name="searchKeyword" maxlength="30" value="${param.searchKeyword}"></td>
-								<td><button type="submit" class="btn btn-active btn-sm">검색</button></td>
+								<td><button type="submit" class="btn btn-sm">검색</button></td>
 						</tr>
 						<c:if test="searchKeyword.size() == 0">
 							
@@ -53,6 +53,7 @@
 					<col width="140" />
 					<col />
 					<col width="140" />
+					<col width="80" />
 				</colgroup>
 				<thead>
 					<tr class="text-indigo-700">
@@ -60,6 +61,7 @@
 						<th>날짜</th>
 						<th>제목</th>
 						<th>작성자</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
 
@@ -70,6 +72,7 @@
 							<td>${article.regDate.substring(2,16)}</td>
 							<td><a class="hover:underline" href="../article/detail?id=${article.id}">${article.title}</a></td>
 							<td>${article.extra__writerName}</td>
+							<td>${article.hitCount}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

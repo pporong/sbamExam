@@ -47,9 +47,7 @@
 					</tr>
 					<tr>
 						<th class="text-indigo-700">조회수</th>
-						<td>
-							<span class="badge article-detail__hit-count">${article.hitCount }</span>
-						</td>
+						<td><span class="badge article-detail__hit-count">${article.hitCount }</span></td>
 					</tr>
 					<tr>
 						<th class="text-indigo-700">작성날짜</th>

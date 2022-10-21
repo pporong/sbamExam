@@ -14,6 +14,7 @@
 				<div class="flex-grow"></div>
 			</div>
 				<div class="search-box">
+				<!-- 검색 박스 -->
 				<form method="get" name="search" 
 				action="../article/list?boardId=${boardId }
 						&searchKeywordTypeCode=${searchKeywordTypeCode}&searchKeyword=${searchKeyword}">
@@ -45,7 +46,7 @@
 				</form>	
 			</div>
 		</div>
-
+		<!-- 게시물 리스트 -->
 		<div class="table-box-type-1 overflow-x-auto">
 			  <table class="table table-compact w-full">
 				<colgroup>

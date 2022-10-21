@@ -3,6 +3,7 @@
 <c:set var="pageTitle" value="ARTICLE DETAIL" />
 <%@ include file="../common/head.jspf"%>
 
+<!-- 조회수 function -->
 <script>
 	const params = {};
 	params.id = parseInt('${param.id}');
@@ -10,6 +11,13 @@
 
 <script>
 	function ArticleDetail__increaseHitCount(){
+		const localStorageKey = 'airtlce__' + params.id + '__alreadyView';
+		
+		if (localStorage.getItem(localStorageKey)) {
+			return;
+		}
+		localStorage.setItem(localStorageKey, true);
+		
 		$.get('../article/doIncreaseHitCountRd?', {
 			id : params.id,
 			ajaxMode : 'Y'
@@ -20,13 +28,13 @@
 	
 	$(function() {
 		// 실전코드
-		// ArticleDetail__increaseHitCount();
+/* 		ArticleDetail__increaseHitCount(); */
 		
 		// 연습코드
 		setTimeout(ArticleDetail__increaseHitCount, 1000);
 	});
+	
 </script>
-
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">

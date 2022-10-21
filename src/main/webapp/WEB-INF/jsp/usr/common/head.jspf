@@ -23,8 +23,9 @@
 <body>
 	<header>
 		<div class=" h-20 flex container mx-auto text-4xl">
-			<a href="#" class=" flex items-center px-3">
-				<span>로고</span>
+			<a href="/" class=" flex items-center px-3">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV0iFwweG3nCT7QQaTvD2HvvE6RePTU6UQOQ&usqp=CAU" 
+				alt="logo" width="120" height="120" style="vertical-align:middle; padding:10px 10px;" />
 			</a>
 
 			<div class="flex-grow"></div>

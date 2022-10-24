@@ -73,14 +73,6 @@ public interface ArticleRepository {
 	public int getArticleHitCount(int id);
 
 	
-	@Update("""
-			<script>
-			UPDATE article SET reactionPiont = reactionPiont + 1
-			WHERE id = #{id}
-			</script>
-							""")
-	public int increaseReactionCount(int id);
-	
 	
 
 }

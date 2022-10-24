@@ -55,6 +55,7 @@
 					<col />
 					<col width="140" />
 					<col width="80" />
+					<col width="40" />
 				</colgroup>
 				<thead>
 					<tr class="text-indigo-700">
@@ -63,6 +64,7 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>조회수</th>
+						<th>추천</th>
 					</tr>
 				</thead>
 
@@ -74,6 +76,7 @@
 							<td><a class="hover:underline" href="../article/detail?id=${article.id}">${article.title}</a></td>
 							<td>${article.extra__writerName}</td>
 							<td>${article.hitCount}</td>
+							<td>${article.extra__goodReactionPiont}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

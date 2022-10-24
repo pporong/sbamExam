@@ -19,20 +19,20 @@ CREATE TABLE article(
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-title = '제목1',
-`body` = '내용1';
+title = '공지1',
+`body` = '공지내용1~';
 
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목1',
+`body` = '내용1!';
+ 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목2',
 `body` = '내용2!';
- 
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-title = '제목3',
-`body` = '내용3!';
 
 SELECT LAST_INSERT_ID(); 
  
@@ -125,32 +125,94 @@ INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'free1',
-`name` = '자유게시판';
+`name` = '자유';
 
 # board 테이블에 boardId 칼럼 추가
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER memberId;
 
-# 1, 2번 게시물을 공지사항 게시물로 수정
+# 1 게시물을 공지사항 게시물로 수정
 UPDATE article
 SET boardId = 1
-WHERE id IN (1,2)
+WHERE id IN (1)
 
-# 3번 게시물을 공지사항 게시물로 수정
+# 2, 3번 게시물을 공지사항 게시물로 수정
 UPDATE article
 SET boardId = 2
-WHERE id IN (3)
+WHERE id IN (2, 3)
 
+UPDATE article
+SET memberId = 2
+WHERE id IN (2, 3)
 
-SELECT * FROM board;
 
 SELECT * FROM article ORDER BY id DESC;
-
+SELECT * FROM board;
 SELECT * FROM `member`;
+SELECT * FROM reactionPoint;
 
-# 게시물 갯수 늘리기
-INSERT INTO article
-(
-    regDate, updateDate, memberId, boardId, title, `body`
-)
-SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, CONCAT('제목_',RAND()), CONCAT('내용_',RAND())
-FROM aritlce;
+#게시물 테이블에 조회수 칼럼 추가
+ALTER TABLE article ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+# reactionPint 테이블 생성
+CREATE TABLE reactionPoint (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relTypeCode CHAR(50) NOT NULL COMMENT '관련 데이터 타입 코드',
+    relId INT(10) UNSIGNED NOT NULL COMMENT '관련 데이터 번호',
+    `point` SMALLINT(2) NOT NULL
+);
+
+# reactionPoint test data
+# 1번 회원이 1번 article에 싫어요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'article', 
+relId = 1,
+`point` = -1; 
+
+# 1번 회원이 2번 article에 좋아요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'article', 
+relId = 2,
+`point` = 1; 
+
+# 2번 회원이 1번 article에 싫어요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article', 
+relId = 1,
+`point` = -1; 
+
+# 2번 회원이 2번 article에 좋아요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article', 
+relId = 2,
+`point` = 1; 
+
+# 3번 회원이 1번 article에 좋아요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article', 
+relId = 1,
+`point` = 1; 
+
+
+
+SELECT * FROM article ORDER BY id DESC;
+SELECT * FROM board;
+SELECT * FROM `member`;
+SELECT * FROM reactionPoint;

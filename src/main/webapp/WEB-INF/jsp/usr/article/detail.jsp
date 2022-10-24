@@ -28,12 +28,17 @@
 	
 	$(function() {
 		// 실전코드
-/* 		ArticleDetail__increaseHitCount(); */
+ 		ArticleDetail__increaseHitCount();
 		
 		// 연습코드
-		setTimeout(ArticleDetail__increaseHitCount, 1000);
+//		setTimeout(ArticleDetail__increaseHitCount, 1000);
 	});
 	
+</script>
+
+
+<script>
+
 </script>
 
 <section class="mt-8 text-xl">
@@ -82,6 +87,18 @@
 			</table>
 		</div>
 
+
+					
+		<div class="btns my-3 flex justify-center">
+			<!-- 추천 버튼 -->
+			<button class="btn gap-2 btn-sm mx-2 btn-like"> 좋아요
+	 			<div class="badge badge-secondary ">${article.reactionPiont }</div>
+			</button>
+			<button class="btn gap-2 btn-sm btn-hate"> 싫어요
+	 			 <div class="badge">${article.reactionPiont }</div>
+			</button>
+		</div>
+			<!-- 뒤로가기, 삭제 버튼 -->
 		<div class="btns my-3 flex justify-end">
 			<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
 			<c:if test="${article.extra__actorCanModify }">
@@ -92,6 +109,7 @@
 					href="../article/doDelete?id=${article.id }"
 				>삭제</a>
 			</c:if>
+
 		</div>
 	</div>
 </section>

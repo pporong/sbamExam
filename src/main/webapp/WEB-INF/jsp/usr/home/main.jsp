@@ -6,9 +6,18 @@
 <section class="mt-8">
 	<div class="container mx-auto">
 		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed officiis tempore et in fugiat natus nobis
-			placeat veritatis repellat cupiditate similique est impedit. Tenetur optio facere a perferendis rem quasi!</div>
+			placeat veritatis repellat cupiditate similique est impedit. Tenetur optio facere a perferendis rem quasi!
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam recusandae ipsam quisquam 
+			at. Quia perferendis totam voluptatem saepe aliquam eum sit optio corporis repellendus placeat 
+			amet adipisci quasi accusamus quas!
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea impedit quos adipisci reiciendis non in a
+			utem praesentium dolor atque cumque deleniti velit modi consectetur magni saepe. Animi perspiciatis incidunt veniam.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+			Aliquam odio ad quia sapiente reiciendis harum saepe quibusdam adipisci voluptatem cum dolor
+			 illum incidunt iste repudiandae commodi numquam rem labore laboriosam.
+			</div>
 
-		안녕하세요
+		만반잘부 ~!
 	</div>
 </section>
 <%@ include file="../common/foot.jspf"%>

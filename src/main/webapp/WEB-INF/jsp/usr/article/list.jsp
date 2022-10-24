@@ -70,7 +70,7 @@
 					<c:forEach var="article" items="${articles }">
 						<tr>
 							<td class="text-green-600">${article.id}</td>
-							<td>${article.regDate.substring(2,16)}</td>
+							<td>${article.forPrintType1RegDate}</td>
 							<td><a class="hover:underline" href="../article/detail?id=${article.id}">${article.title}</a></td>
 							<td>${article.extra__writerName}</td>
 							<td>${article.hitCount}</td>

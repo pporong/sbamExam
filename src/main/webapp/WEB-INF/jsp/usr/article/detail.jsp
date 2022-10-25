@@ -75,6 +75,10 @@
 						<td>${article.extra__writerName }</td>
 					</tr>
 					<tr>
+						<th class="text-indigo-700">추천수</th>
+						<td><span class="badge badge-outline">${article.extra__goodReactionPoint}</span></td>
+					</tr>
+					<tr>
 						<th class="text-indigo-700">제목</th>
 						<td>${article.title }</td>
 					</tr>
@@ -91,7 +95,6 @@
 					
 		<div class="btns my-3 flex justify-center">
 			<!-- 추천 버튼 -->
-			
 			<button class="btn gap-2 btn-sm mx-2 btn-like"> 좋아요
 	 			<div class="badge badge-secondary ">${article.extra__goodReactionPoint}</div>
 			</button>

@@ -91,12 +91,14 @@
 					
 		<div class="btns my-3 flex justify-center">
 			<!-- 추천 버튼 -->
+			
 			<button class="btn gap-2 btn-sm mx-2 btn-like"> 좋아요
-	 			<div class="badge badge-secondary ">${article.extra__sumReactionPoint}</div>
+	 			<div class="badge badge-secondary ">${article.extra__goodReactionPoint}</div>
 			</button>
 			<button class="btn gap-2 btn-sm btn-hate"> 싫어요
-	 			 <div class="badge">${article.extra__sumReactionPoint}</div>
+	 			 <div class="badge">${article.extra__badReactionPoint}</div>
 			</button>
+			
 		</div>
 			<!-- 뒤로가기, 삭제 버튼 -->
 		<div class="btns my-3 flex justify-end">

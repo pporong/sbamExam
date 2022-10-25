@@ -22,8 +22,8 @@
 						<tr>
 							<td>
 								<select class="text-center" name="boardId" data-value="${param.boardId}">
-									<option value="disabled"> 게시판 선택 </option>
-									<option  value="1">공 지 사 항</option>
+ 									<option value="" selected="${param.boardId}" >게시판 선택</option>
+									<option value="1">공 지 사 항</option>
 									<option value="2">자 유 게 시 판</option>
 								</select>
 							</td>

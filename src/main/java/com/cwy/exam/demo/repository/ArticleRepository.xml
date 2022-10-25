@@ -14,7 +14,7 @@
 		`body` = #{body}
 	</insert>
 
- 	<select id="getArticles" resultType="Article">
+ 	<select id="getForPrintArticles" resultType="Article">
 		SELECT A.*,
 		IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
 		IFNULL(SUM(IF(RP.point &gt; 0, RP.point, 0)),0) AS extra__goodReactionPoint,
@@ -103,5 +103,5 @@
 	<select id="getLastInsertId" resultType="int">
 		SELECT LAST_INSERT_ID()
 	</select>
-
+	
 </mapper>

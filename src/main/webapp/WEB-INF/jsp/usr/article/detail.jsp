@@ -34,10 +34,14 @@
 //		setTimeout(ArticleDetail__increaseHitCount, 1000);
 	});
 	
-</script>
+</script> 
 
-
+<!-- 좋아요 function -->
 <script>
+	function f_clickLikefunc() {
+		alert(if(confirm('좋아요를 누르시겠습니까?') == false) return false);
+	}
+
 
 </script>
 
@@ -93,17 +97,17 @@
 		</div>
 
 
-					
-		<div class="btns my-3 flex justify-center">
-			<!-- 추천 버튼 -->
-			<button class="btn gap-2 btn-sm mx-2 btn-like"> 좋아요
-	 			<div class="badge badge-secondary ">${article.extra__goodReactionPoint}</div>
-			</button>
-			<button class="btn gap-2 btn-sm btn-hate"> 싫어요
-	 			 <div class="badge">${article.extra__badReactionPoint}</div>
-			</button>
-			
-		</div>
+		<c:if test="${actorCanMakeReaction }">			
+			<div class="btns my-3 flex justify-center">
+				<!-- 추천 버튼 -->
+				<button class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 
+				<div class="badge badge-secondary ">${article.extra__goodReactionPoint}</div>
+				</button>
+				<button class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요
+		 			 <div class="badge">${article.extra__badReactionPoint}</div>
+				</button>
+			</div>
+		</c:if>
 			<!-- 뒤로가기, 삭제 버튼 -->
 		<div class="btns my-3 flex justify-end">
 			<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>

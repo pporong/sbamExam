@@ -15,7 +15,7 @@ public interface ArticleRepository {
 
 	public Article getForPrintArticle(int id);
 
-	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int limitStart, int limitTake);
+	public List<Article> getForPrintArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int limitStart, int limitTake);
 
 	public void deleteArticle(int id);
 
@@ -27,28 +27,28 @@ public interface ArticleRepository {
 
 	@Select("""
 			<script>
-			SELECT COUNT(*) AS cnt
-			FROM article AS A
-			WHERE 1
-			<if test="boardId != 0">
-				AND A.boardId = #{boardId}
-			</if>
-			<if test="searchKeyword != ''">
-				<choose>
-					<when test="searchKeywordTypeCode == 'title'">
-						AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
-					</when>
-					<when test="searchKeywordTypeCode == 'body'">
-						AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
-					</when>
-					<otherwise>
-						AND (
-							A.title LIKE CONCAT('%', #{searchKeyword}, '%')
-							OR A.body LIKE CONCAT('%', #{searchKeyword}, '%')
-							)
-					</otherwise>
-				</choose>
-			</if>
+				SELECT COUNT(*) AS cnt
+				FROM article AS A
+				WHERE 1
+				<if test="boardId != 0">
+					AND A.boardId = #{boardId}
+				</if>
+				<if test="searchKeyword != ''">
+					<choose>
+						<when test="searchKeywordTypeCode == 'title'">
+							AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="searchKeywordTypeCode == 'body'">
+							AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<otherwise>
+							AND (
+								A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+								OR A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+								)
+						</otherwise>
+					</choose>
+				</if>
 			</script>
 							""")
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
@@ -56,8 +56,8 @@ public interface ArticleRepository {
 	
 	@Update("""
 			<script>
-			UPDATE article SET hitCount = hitCount + 1
-			WHERE id = #{id}
+				UPDATE article SET hitCount = hitCount + 1
+				WHERE id = #{id}
 			</script>
 							""")
 	public int increaseHitCount(int id);
@@ -65,12 +65,25 @@ public interface ArticleRepository {
 	
 	@Select("""
 			<script>
-			SELECT hitCount
-			FROM article
-			WHERE id = #{id}
+				SELECT hitCount
+				FROM article
+				WHERE id = #{id}
 			</script>
 				""")
 	public int getArticleHitCount(int id);
+
+	
+	@Select("""
+			<script>
+				SELECT IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint
+				FROM reactionPoint AS RP
+				WHERE RP.relTypeCode = 'article'
+				AND RP.relId = #{id}
+				AND RP.memberId = #{memberId}
+			</script>
+			""")
+	public int getSumReactionPointByMemberId(int memberId, int id);
+
 
 
 }

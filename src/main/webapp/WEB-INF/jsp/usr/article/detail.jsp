@@ -52,7 +52,8 @@
 				<tbody>
 					<tr>
 						<th class="text-indigo-700">번호</th>
-						<td class="text-green-600">${article.id }</td>
+						<td class="text-green-600"><span class="badge badge-outline">${article.id }</span></td>
+						
 					</tr>
 					<tr>
 						<th class="text-indigo-700">게시판</th>

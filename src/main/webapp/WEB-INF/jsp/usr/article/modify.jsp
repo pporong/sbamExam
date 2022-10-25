@@ -15,7 +15,7 @@
 				<tbody>
 					<tr>
 						<th class="text-indigo-700">번호</th>
-						<td class="text-green-600">${article.id }</td>
+						<td class="text-green-600"><span class="badge badge-outline">${article.id }</span></td>
 					</tr>
 					<tr>
 						<th class="text-indigo-700">작성날짜</th>
@@ -28,6 +28,10 @@
 					<tr>
 						<th class="text-indigo-700">작성자</th>
 						<td>${article.extra__writerName }</td>
+					</tr>
+					<tr>
+						<th class="text-indigo-700">추천수</th>
+						<td><span class="badge badge-outline">${article.extra__goodReactionPoint}</span></td>
 					</tr>
 					<tr>
 						<th class="text-indigo-700">제목</th>

@@ -20,4 +20,20 @@ public class ReactionPointService {
 		return reactionPointRepository.getSumReactionPointByMemberId(actorId, relTypeCode, relId) == 0;
 	}
 
+
+	public int increaseGoodRp(int id) {
+		return reactionPointRepository.increaseGoodRp(id);
+		
+	}
+
+
+	public int getGoodRpCount(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+
 }

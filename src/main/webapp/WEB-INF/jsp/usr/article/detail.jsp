@@ -99,12 +99,13 @@
 		<c:if test="${actorCanMakeReaction }">			
 			<div class="btns my-3 flex justify-center">
 				<!-- 추천 버튼 -->
-				<button id="" class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 
-				<div class="badge badge-secondary ">${article.goodReactionPoint}</div>
-				</button>
-				<button id="" class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요
+				<a id="" href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}" 
+				class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 
+					<div class="badge badge-secondary ">${article.goodReactionPoint}</div>
+				</a>
+				<a id="" href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}" class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요
 		 			 <div class="badge">${article.badReactionPoint}</div>
-				</button>
+				</a>
 			</div>
 		</c:if>
 			<!-- 뒤로가기, 삭제 버튼 -->

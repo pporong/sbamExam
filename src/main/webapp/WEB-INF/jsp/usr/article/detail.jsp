@@ -38,12 +38,9 @@
 
 <!-- 좋아요 function -->
 <script>
-
-
 	function f_clickLikefunc() {
 		alert(if(confirm('좋아요를 누르시겠습니까?') == false) return false);
-	}
-	
+	}	
 
 </script>
 
@@ -83,7 +80,7 @@
 					</tr>
 					<tr>
 						<th class="text-indigo-700">추천수</th>
-						<td><span class="badge badge-outline">${article.extra__goodReactionPoint}</span></td>
+						<td><span class="badge badge-outline">${article.goodReactionPoint}</span></td>
 					</tr>
 					<tr>
 						<th class="text-indigo-700">제목</th>
@@ -102,11 +99,11 @@
 		<c:if test="${actorCanMakeReaction }">			
 			<div class="btns my-3 flex justify-center">
 				<!-- 추천 버튼 -->
-				<button id="add-goodRp-btn" class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 
-				<div class="badge badge-secondary ">${article.extra__goodReactionPoint}</div>
+				<button id="" class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 
+				<div class="badge badge-secondary ">${article.goodReactionPoint}</div>
 				</button>
-				<button id="add-badRp-btn" class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요
-		 			 <div class="badge">${article.extra__badReactionPoint}</div>
+				<button id="" class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요
+		 			 <div class="badge">${article.badReactionPoint}</div>
 				</button>
 			</div>
 		</c:if>

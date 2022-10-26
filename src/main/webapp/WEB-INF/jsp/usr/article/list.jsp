@@ -76,7 +76,7 @@
 							<td><a class="hover:underline" href="../article/detail?id=${article.id}">${article.title}</a></td>
 							<td>${article.extra__writerName}</td>
 							<td>${article.hitCount}</td>
-							<td>${article.extra__goodReactionPoint}</td>
+							<td>${article.goodReactionPoint}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

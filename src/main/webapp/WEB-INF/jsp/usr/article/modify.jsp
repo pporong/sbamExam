@@ -31,7 +31,7 @@
 					</tr>
 					<tr>
 						<th class="text-indigo-700">추천수</th>
-						<td><span class="badge badge-outline">${article.extra__goodReactionPoint}</span></td>
+						<td><span class="badge badge-outline">${article.goodReactionPoint}</span></td>
 					</tr>
 					<tr>
 						<th class="text-indigo-700">제목</th>

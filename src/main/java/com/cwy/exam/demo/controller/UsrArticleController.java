@@ -153,6 +153,7 @@ public class UsrArticleController {
 		return rq.jsReplace(Ut.f("%d번 게시물을 수정했습니다", id), Ut.f("../article/detail?id=%d", id));
 	}
 
+	// detail
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
 		
@@ -164,6 +165,7 @@ public class UsrArticleController {
 		
 		
 		model.addAttribute("actorCanMakeReaction", actorCanMakeReaction);
+		model.addAttribute("isLogined",rq.isLogined());
 
 		return "usr/article/detail";
 	}

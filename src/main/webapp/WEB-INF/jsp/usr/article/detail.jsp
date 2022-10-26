@@ -7,6 +7,9 @@
 <script>
 	const params = {};
 	params.id = parseInt('${param.id}');
+	
+/* 	var isAlreadyAddGoodRp = ${isAlreadyAddGoodRp};
+	var isAlreadyAddBadRp = ${isAlreadyAddBadRp}; */
 </script>
 
 <script>
@@ -29,19 +32,18 @@
 	$(function() {
 		// 실전코드
  		ArticleDetail__increaseHitCount();
-		
-		// 연습코드
-//		setTimeout(ArticleDetail__increaseHitCount, 1000);
 	});
-	
+
 </script> 
 
 <!-- 좋아요 function -->
 <script>
+
+
 	function f_clickLikefunc() {
 		alert(if(confirm('좋아요를 누르시겠습니까?') == false) return false);
 	}
-
+	
 
 </script>
 
@@ -100,10 +102,10 @@
 		<c:if test="${actorCanMakeReaction }">			
 			<div class="btns my-3 flex justify-center">
 				<!-- 추천 버튼 -->
-				<button class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 
+				<button id="add-goodRp-btn" class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 
 				<div class="badge badge-secondary ">${article.extra__goodReactionPoint}</div>
 				</button>
-				<button class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요
+				<button id="add-badRp-btn" class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요
 		 			 <div class="badge">${article.extra__badReactionPoint}</div>
 				</button>
 			</div>
@@ -123,7 +125,5 @@
 		</div>
 	</div>
 </section>
-
-<!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCount?id=1" frameborder="0"></iframe> -->
 
 <%@ include file="../common/foot.jspf"%>

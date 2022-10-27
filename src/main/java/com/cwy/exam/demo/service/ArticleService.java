@@ -119,4 +119,28 @@ public class ArticleService {
 	public int getArticleHitCount(int id) {
 		return articleRepository.getArticleHitCount(id);
 	}
+
+	public ResultData increaseGoodRp(int relId) {
+		int affectedRowsCount = articleRepository.increaseGoodRp(relId);
+		
+		if (affectedRowsCount == 0) {
+			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다.", "affectedRowsCount", affectedRowsCount);
+		}
+		
+		return ResultData.from("S-1", "좋아요 증가", "affectedRowsCount", affectedRowsCount);
+		
+	}
+
+	public ResultData increaseBadRp(int relId) {
+		int affectedRowsCount = articleRepository.increaseBadRp(relId);
+		
+		if (affectedRowsCount == 0) {
+			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다.", "affectedRowsCount", affectedRowsCount);
+		}
+		
+		return ResultData.from("S-1", "싫어요 증가", "affectedRowsCount", affectedRowsCount);
+		
+	}
+
+
 }

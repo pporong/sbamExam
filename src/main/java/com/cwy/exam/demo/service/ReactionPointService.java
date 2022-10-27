@@ -45,9 +45,29 @@ public class ReactionPointService {
 		}
 		return ResultData.from("S-1", "싫어요 처리 완료~");
 	}
+	
 
+	public ResultData doDeleteBadReaction(int actorId, String relTypeCode, int relId) {
+		
+		reactionPointRepository.delBadReactionPoint(actorId, relTypeCode, relId);
+		
+		switch (relTypeCode) {
+		case "article" :
+				articleService.decreaseBadRp(relId);
+				break;
+		}
+		return ResultData.from("S-1", "싫어요 처리 완료~");
 		
 	}
+	
+	// 멤버별 게시물 추천 상황 
+	public ResultData getRpInfoByMemberId(int actorId, String relTypeCode, int relId) {
+		
+		reactionPointRepository.getRpInfoByMemberId(actorId, relTypeCode, relId);
+		
+		return ResultData.from("S-2", "게시물별 추천 상황");
+	}
 
+}
 
 

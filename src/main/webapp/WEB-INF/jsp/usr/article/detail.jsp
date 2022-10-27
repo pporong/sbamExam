@@ -112,6 +112,16 @@
 				class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요 </a>
 			</div>
 		</c:if>
+			
+			
+			<div class="btns my-3 flex justify-center">
+				<!-- 추천 버튼 -->
+				<a id="" href="/usr/reactionPoint/doDeleteBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" 
+				class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 </a>
+				<a id="" href="/usr/reactionPoint/doDeleteBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" 
+				class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요 </a>
+			</div>
+		
 			<!-- 뒤로가기, 삭제 버튼 -->
 		<div class="btns my-3 flex justify-end">
 			<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>

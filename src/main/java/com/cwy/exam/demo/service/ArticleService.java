@@ -120,6 +120,7 @@ public class ArticleService {
 		return articleRepository.getArticleHitCount(id);
 	}
 
+	// 좋아요 + 1
 	public ResultData increaseGoodRp(int relId) {
 		int affectedRowsCount = articleRepository.increaseGoodRp(relId);
 		
@@ -140,6 +141,17 @@ public class ArticleService {
 		
 		return ResultData.from("S-1", "싫어요 증가", "affectedRowsCount", affectedRowsCount);
 		
+	}
+
+	// 싫어요 - 1
+	public ResultData decreaseBadRp(int relId) {
+		int affectedRowsCount = articleRepository.decreaseBadRp(relId);
+		
+		if (affectedRowsCount == 0) {
+			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다.", "affectedRowsCount", affectedRowsCount);
+		}
+		
+		return ResultData.from("S-2", "싫어요 취소", "affectedRowsCount", affectedRowsCount);
 	}
 
 

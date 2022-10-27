@@ -89,6 +89,15 @@ public interface ArticleRepository {
 					""")
 	public int increaseBadRp(int relId);
 
+	@Update("""
+			<script>
+				UPDATE article
+				SET badReactionPoint = badReactionPoint - 1
+				WHERE id = #{relId}
+			</script>
+					""")
+	public int decreaseBadRp(int relId);
+
 
 
 

@@ -1,5 +1,6 @@
 package com.cwy.exam.demo.repository;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -44,5 +45,31 @@ public interface ReactionPointRepository {
 			</script>
 					""")
 	void addBadReactionPoint(int actorId, String relTypeCode, int relId);
+
+
+
+	@Delete ("""
+			<script>
+				DELETE FROM reactionPoint
+				WHERE memberId = #{actorId}
+				AND relTypeCode = #{relTypeCode}
+				AND relId = #{relId}
+				`point` = 1
+			</script>
+					""")
+	void delBadReactionPoint(int actorId, String relTypeCode, int relId);
+
+	
+	@Select ("""
+			<script>
+				SELECT RP.relTypeCode, RP.relId,
+				SUM(IF(RP.point &gt; 0, RP.point, 0)) AS goodReactionPoint,
+				SUM(IF(RP.point &lt; 0, RP.point * -1, 0)) AS badReactionPoint
+				FROM reactionPoint AS RP
+				WHERE RP.memberId = #{actorId}
+				GROUP BY RP.relTypeCode, RP.relId
+			</script>
+					""")
+	void getRpInfoByMemberId(int actorId, String relTypeCode, int relId);
 
 }

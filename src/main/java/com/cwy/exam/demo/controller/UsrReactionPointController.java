@@ -43,6 +43,14 @@ public class UsrReactionPointController {
 		
 		return rq.jsReplace("싫어요를 눌렀어요!", replaceUri);
 	}
+	
+	@RequestMapping("/usr/reactionPoint/doDeleteBadReaction")
+	@ResponseBody
+	public String doDeleteBadReaction(String relTypeCode, int relId, String replaceUri) {
 
+		reactionPointService.doDeleteBadReaction(rq.getLoginedMemberId(), relTypeCode, relId);
+
+		return rq.jsReplace("싫어요를 취소했어요!", replaceUri);
+	}
 
 }

@@ -15,9 +15,7 @@
 			</div>
 				<div class="search-box">
 				<!-- 검색 박스 -->
-				<form method="get" name="search" 
-				action="../article/list?boardId=${boardId }
-						&searchKeywordTypeCode=${searchKeywordTypeCode}&searchKeyword=${searchKeyword}">
+				<form name="search">
 					<table class="">
 						<tr>
 							<td>
@@ -38,10 +36,6 @@
 								<td><input class="text-center" type="text" placeholder="검색어 입력" name="searchKeyword" maxlength="30" value="${param.searchKeyword}"></td>
 								<td><button type="submit" class="btn btn-sm">검색</button></td>
 						</tr>
-						<c:if test="searchKeyword.size() == 0">
-							
-						</c:if>
-						
 					</table>
 				</form>	
 			</div>

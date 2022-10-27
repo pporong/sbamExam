@@ -55,7 +55,7 @@
 				<tbody>
 					<tr>
 						<th class="text-indigo-700">번호</th>
-						<td class="text-green-600"><span class="badge badge-outline">${article.id }</span></td>
+						<td class="text-green-600"><span class="badge badge-outline">${article.id }번 글</span></td>
 						
 					</tr>
 					<tr>
@@ -79,8 +79,15 @@
 						<td>${article.extra__writerName }</td>
 					</tr>
 					<tr>
-						<th class="text-indigo-700">추천수</th>
-						<td><span class="badge badge-outline">${article.goodReactionPoint}</span></td>
+						<th class="text-indigo-700">현재 추천수</th>
+						<td>
+							<span class=" gap-2 btn-sm mx-2 btn-like" onclick=""> 👍 좋아요 
+								<div class="badge badge-secondary ">${article.goodReactionPoint}</div>
+							</span>
+							<span class=" gap-2 btn-sm btn-hate"> 👎 싫어요 
+		 						 <div class="badge">${article.badReactionPoint}</div>
+		 					</span>
+						</td>
 					</tr>
 					<tr>
 						<th class="text-indigo-700">제목</th>
@@ -99,14 +106,10 @@
 		<c:if test="${actorCanMakeReaction }">			
 			<div class="btns my-3 flex justify-center">
 				<!-- 추천 버튼 -->
-				<a id="" href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.currentUri}" 
-				class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 
-					<div class="badge badge-secondary ">${article.goodReactionPoint}</div>
-				</a>
-				<a id="" href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.currentUri}" 
-				class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요
-		 			 <div class="badge">${article.badReactionPoint}</div>
-				</a>
+				<a id="" href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" 
+				class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 </a>
+				<a id="" href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" 
+				class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요 </a>
 			</div>
 		</c:if>
 			<!-- 뒤로가기, 삭제 버튼 -->

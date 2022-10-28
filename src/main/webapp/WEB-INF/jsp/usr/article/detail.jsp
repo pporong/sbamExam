@@ -103,26 +103,41 @@
 		</div>
 
 
+		<!-- 추천 기능 사용 가능? -->
 		<c:if test="${actorCanMakeReaction }">			
 			<div class="btns my-3 flex justify-center">
 				<!-- 추천 버튼 -->
 				<a id="" href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" 
-				class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 </a>
+				class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick=""> 👍 좋아요 </a>
 				<a id="" href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" 
 				class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요 </a>
 			</div>
 		</c:if>
-			
-			
-			<div class="btns my-3 flex justify-center">
-				<!-- 추천 버튼 -->
-				<a id="" href="/usr/reactionPoint/doDeleteBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" 
-				class="btn gap-2 btn-sm mx-2 btn-like btn-outline" onclick="f_clickLikefunc();"> 👍 좋아요 </a>
-				<a id="" href="/usr/reactionPoint/doDeleteBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" 
-				class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요 </a>
-			</div>
 		
-			<!-- 뒤로가기, 삭제 버튼 -->
+		<!-- 싫어요를 누르고싶다면 좋아요를 취소 해! -->
+		<c:if test="${actorCanDelGoodRp }">
+	 	<div class="btns my-3 flex justify-center">
+				<!-- 추천 버튼 -->
+				<a id="" href="/usr/reactionPoint/doDeleteGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" 
+				class="btn gap-2 btn-sm mx-2 btn-like btn-warning"> 👍 좋아요 </a>
+				<a onclick="alert(this.title); return false;" title="싫어요를 누르고 싶다면 좋아요를 취소 해 주세요!" id="" href="#" 
+				class="btn gap-2 btn-sm btn-hate btn-outline"> 👎 싫어요 </a>
+			</div> 
+	 	</c:if>
+	 	
+	 	<!-- 좋아요를 누르고싶다면 싫어요를 취소 해! -->
+		<c:if test="${actorCanDelBadRp }">
+	 	<div class="btns my-3 flex justify-center">
+				<!-- 추천 버튼 -->
+				<a onclick="alert(this.title); return false;" title="좋아요를 누르고 싶다면 싫어요를 취소 해 주세요!" id="" href="#" 
+				class="btn gap-2 btn-sm mx-2 btn-like btn-outline"> 👍 좋아요 </a>
+				<a href="/usr/reactionPoint/doDeleteBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" 
+				class="btn gap-2 btn-sm btn-hate btn-warning"> 👎 싫어요 </a>
+			</div> 
+	 	</c:if>
+		 
+		 
+		<!-- 뒤로가기, 삭제 버튼 -->
 		<div class="btns my-3 flex justify-end">
 			<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
 			<c:if test="${article.extra__actorCanModify }">

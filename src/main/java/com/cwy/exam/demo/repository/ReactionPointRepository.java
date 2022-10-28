@@ -18,6 +18,7 @@ public interface ReactionPointRepository {
 			</script>
 			""")
 	int getSumReactionPointByMemberId(int actorId, String relTypeCode, int relId);
+	// memberId 의 추천 수 sum
 
 	
 	@Insert ("""
@@ -32,6 +33,8 @@ public interface ReactionPointRepository {
 			</script>
 					""")
 	void addGoodReactionPoint(int actorId, String relTypeCode, int relId);
+	// goodPoint +1
+	
 	
 	@Insert ("""
 			<script>
@@ -45,20 +48,31 @@ public interface ReactionPointRepository {
 			</script>
 					""")
 	void addBadReactionPoint(int actorId, String relTypeCode, int relId);
-
-
-
+	// badPoint +1
+	
+	
 	@Delete ("""
 			<script>
 				DELETE FROM reactionPoint
 				WHERE memberId = #{actorId}
 				AND relTypeCode = #{relTypeCode}
 				AND relId = #{relId}
-				`point` = 1
+				`point` = - 1
 			</script>
 					""")
 	void delBadReactionPoint(int actorId, String relTypeCode, int relId);
-
+	
+	
+	@Delete ("""
+			<script>
+				DELETE FROM reactionPoint
+				WHERE memberId = #{actorId}
+				AND relTypeCode = #{relTypeCode}
+				AND relId = #{relId}
+				`point` = + 1
+			</script>
+					""")
+	void delGoodReactionPoint(int actorId, String relTypeCode, int relId);
 	
 	@Select ("""
 			<script>
@@ -70,6 +84,8 @@ public interface ReactionPointRepository {
 				GROUP BY RP.relTypeCode, RP.relId
 			</script>
 					""")
-	void getRpInfoByMemberId(int actorId, String relTypeCode, int relId);
+	boolean getRpInfoByMemberId(int actorId, String relTypeCode, int relId);
+
+
 
 }

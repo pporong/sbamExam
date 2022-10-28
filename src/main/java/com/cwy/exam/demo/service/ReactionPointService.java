@@ -15,13 +15,23 @@ public class ReactionPointService {
 	@Autowired
 	private ArticleService articleService;
 
-	public boolean actorCanMakeReaction(int actorId, String relTypeCode, int relId) {
+	// 너 추천 남겼니?
+	public ResultData actorCanMakeReaction(int actorId, String relTypeCode, int relId) {
+		
 		if (actorId == 0) {
-			return false;
+			return ResultData.from("F-1", "로그인 후 이용 가능합니다.");
 		}
-		return reactionPointRepository.getSumReactionPointByMemberId(actorId, relTypeCode, relId) == 0;
+		
+		int sumReactionPointByMemberId =  reactionPointRepository.getSumReactionPointByMemberId(actorId, relTypeCode, relId);
+		
+		if(sumReactionPointByMemberId != 0) {
+			return ResultData.from("F-2", "추천기능 사용 불가!", "sumReactionPointByMemberId", sumReactionPointByMemberId);
+		}
+		
+		return ResultData.from("S-1", "추천기능 사용 가능!", "sumReactionPointByMemberId", sumReactionPointByMemberId);
 	}
 
+	// 좋아요 +1
 	public ResultData addGoodReactionPoint(int actorId, String relTypeCode, int relId) {
 		
 		reactionPointRepository.addGoodReactionPoint(actorId, relTypeCode, relId);
@@ -34,6 +44,7 @@ public class ReactionPointService {
 		return ResultData.from("S-1", "좋아요 처리 완료~");
 	}
 		
+	// 싫어요 +1
 	public ResultData addBadReactionPoint(int actorId, String relTypeCode, int relId) {
 		
 		reactionPointRepository.addBadReactionPoint(actorId, relTypeCode, relId);
@@ -47,6 +58,7 @@ public class ReactionPointService {
 	}
 	
 
+	// 싫어요 -1
 	public ResultData doDeleteBadReaction(int actorId, String relTypeCode, int relId) {
 		
 		reactionPointRepository.delBadReactionPoint(actorId, relTypeCode, relId);
@@ -56,7 +68,20 @@ public class ReactionPointService {
 				articleService.decreaseBadRp(relId);
 				break;
 		}
-		return ResultData.from("S-1", "싫어요 처리 완료~");
+		return ResultData.from("S-1", "싫어요 취소 처리 완료~");
+		
+	}
+	
+	// 좋아요 -1
+	public ResultData doDeleteGoodReaction(int actorId, String relTypeCode, int relId) {
+		reactionPointRepository.delGoodReactionPoint(actorId, relTypeCode, relId);
+		
+		switch (relTypeCode) {
+		case "article" :
+				articleService.decreaseGoodRp(relId);
+				break;
+		}
+		return ResultData.from("S-1", "좋아요 취소 처리 완료~");
 		
 	}
 	
@@ -68,6 +93,11 @@ public class ReactionPointService {
 		return ResultData.from("S-2", "게시물별 추천 상황");
 	}
 
+	// BadRpCount
+	public void getBadRpCount(int relId) {
+		
+	}
+	
+	
+
 }
-
-

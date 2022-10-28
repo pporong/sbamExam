@@ -31,7 +31,7 @@ public class ReactionPointService {
 		return ResultData.from("S-1", "추천기능 사용 가능!", "sumReactionPointByMemberId", sumReactionPointByMemberId);
 	}
 
-	// 좋아요 +1
+	// 좋아요
 	public ResultData addGoodReactionPoint(int actorId, String relTypeCode, int relId) {
 		
 		reactionPointRepository.addGoodReactionPoint(actorId, relTypeCode, relId);
@@ -43,8 +43,24 @@ public class ReactionPointService {
 		}
 		return ResultData.from("S-1", "좋아요 처리 완료~");
 	}
+	
+	
+	// 좋아요 취소
+	public ResultData deleteGoodRp(int actorId, String relTypeCode, int relId) {
 		
-	// 싫어요 +1
+		reactionPointRepository.delGoodReactionPoint(actorId, relTypeCode, relId);
+		
+		switch (relTypeCode) {
+		case "article" :
+				articleService.decreaseGoodRp(relId);
+				break;
+		}
+		return ResultData.from("S-1", "좋아요 취소 처리 완료~");
+		
+	}
+	
+		
+	// 싫어요
 	public ResultData addBadReactionPoint(int actorId, String relTypeCode, int relId) {
 		
 		reactionPointRepository.addBadReactionPoint(actorId, relTypeCode, relId);
@@ -58,8 +74,8 @@ public class ReactionPointService {
 	}
 	
 
-	// 싫어요 -1
-	public ResultData doDeleteBadReaction(int actorId, String relTypeCode, int relId) {
+	// 싫어요 취소
+	public ResultData deleteBadRp(int actorId, String relTypeCode, int relId) {
 		
 		reactionPointRepository.delBadReactionPoint(actorId, relTypeCode, relId);
 		
@@ -71,31 +87,13 @@ public class ReactionPointService {
 		return ResultData.from("S-1", "싫어요 취소 처리 완료~");
 		
 	}
-	
-	// 좋아요 -1
-	public ResultData doDeleteGoodReaction(int actorId, String relTypeCode, int relId) {
-		reactionPointRepository.delGoodReactionPoint(actorId, relTypeCode, relId);
-		
-		switch (relTypeCode) {
-		case "article" :
-				articleService.decreaseGoodRp(relId);
-				break;
-		}
-		return ResultData.from("S-1", "좋아요 취소 처리 완료~");
-		
-	}
-	
+
 	// 멤버별 게시물 추천 상황 
 	public ResultData getRpInfoByMemberId(int actorId, String relTypeCode, int relId) {
 		
 		reactionPointRepository.getRpInfoByMemberId(actorId, relTypeCode, relId);
 		
 		return ResultData.from("S-2", "게시물별 추천 상황");
-	}
-
-	// BadRpCount
-	public void getBadRpCount(int relId) {
-		
 	}
 	
 	

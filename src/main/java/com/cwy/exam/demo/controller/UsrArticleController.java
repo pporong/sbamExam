@@ -37,10 +37,10 @@ public class UsrArticleController {
 	public String doWrite(int boardId, String title, String body, String replaceUri) {
 		
 		if (Ut.empty(title)) {
-			return rq.jsHistoryBack("제목을 입력해주세요");
+			return rq.jsHistoryBack("!! 제목을 입력해주세요 !!");
 		}
 		if (Ut.empty(body)) {
-			return rq.jsHistoryBack("내용을 입력해주세요");
+			return rq.jsHistoryBack("!! 내용을 입력해주세요!! ");
 		}
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), boardId, title, body);
 		
@@ -184,6 +184,7 @@ public class UsrArticleController {
 		return "usr/article/detail";
 	}
 
+	// 조회수
 	@RequestMapping("/usr/article/doIncreaseHitCountRd")
 	@ResponseBody
 	public ResultData<Integer> doIncreaseHitCountRd(int id) {

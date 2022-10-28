@@ -52,7 +52,7 @@ public interface ArticleRepository {
 			</script>
 							""")
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
-
+	// 게시물 카운트
 	
 	@Update("""
 			<script>
@@ -61,6 +61,7 @@ public interface ArticleRepository {
 			</script>
 							""")
 	public int increaseHitCount(int id);
+	// 조회수 증가
 	
 	@Select("""
 			<script>
@@ -70,6 +71,7 @@ public interface ArticleRepository {
 			</script>
 				""")
 	public int getArticleHitCount(int id);
+	// 조회수 가져오기
 
 	@Update("""
 			<script>
@@ -79,25 +81,7 @@ public interface ArticleRepository {
 			</script>
 					""")
 	public int increaseGoodRp(int relId);
-
-	@Update("""
-			<script>
-				UPDATE article
-				SET badReactionPoint = badReactionPoint + 1
-				WHERE id = #{relId}
-			</script>
-					""")
-	public int increaseBadRp(int relId);
-
-	@Update("""
-			<script>
-				UPDATE article
-				SET badReactionPoint = badReactionPoint - 1
-				WHERE id = #{relId}
-			</script>
-					""")
-	public int decreaseBadRp(int relId);
-
+	// 좋아요 증가 update
 	
 	@Update("""
 			<script>
@@ -107,9 +91,26 @@ public interface ArticleRepository {
 			</script>
 					""")
 	public int decreaseGoodRp(int relId);
+	// 좋아요 취소 update
 
+	@Update("""
+			<script>
+				UPDATE article
+				SET badReactionPoint = badReactionPoint + 1
+				WHERE id = #{relId}
+			</script>
+					""")
+	public int increaseBadRp(int relId);
+	// 싫어요 증가 update
 
-
-
+	@Update("""
+			<script>
+				UPDATE article
+				SET badReactionPoint = badReactionPoint - 1
+				WHERE id = #{relId}
+			</script>
+					""")
+	public int decreaseBadRp(int relId);
+	// 실헝요 취소 update
 
 }

@@ -22,10 +22,10 @@ public class UsrReactionPointController {
 	@ResponseBody
 	public String doGoodReaction(String relTypeCode, int relId, String replaceUri) {
 		
-		boolean actorCanMakeReaction = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(), relTypeCode, relId).isSuccess();
+		ResultData actorCanMakeReactionRd = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(), relTypeCode, relId);
 		
-		if (actorCanMakeReaction == false) {
-			return rq.jsHistoryBackOnView("좋아요는 한번만 누를 수 있어요!");
+		if (actorCanMakeReactionRd.isFail()) {
+			return rq.jsHistoryBackOnView("아무런 리액션을 취하지 않았어요! 리액션 후 이용 가능합니다!");
 		}
 
 		reactionPointService.addGoodReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
@@ -38,7 +38,13 @@ public class UsrReactionPointController {
 	@ResponseBody
 	public String doDeleteGoodReaction(String relTypeCode, int relId, String replaceUri) {
 
-		reactionPointService.doDeleteGoodReaction(rq.getLoginedMemberId(), relTypeCode, relId);
+		ResultData actorCanMakeReactionRd = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(), relTypeCode, relId);
+		
+		// 직접 도메인을 치고 올 경우 방어?..
+		if (actorCanMakeReactionRd.isSuccess()) {
+			return rq.jsHistoryBackOnView(actorCanMakeReactionRd.getMsg());
+		}
+		reactionPointService.deleteGoodRp(rq.getLoginedMemberId(), relTypeCode, relId);
 
 		return rq.jsReplace("좋아요를 취소했어요!", replaceUri);
 	}
@@ -48,12 +54,13 @@ public class UsrReactionPointController {
 	@ResponseBody
 	public String addBadReactionPoint(String relTypeCode, int relId, String replaceUri) {	
 		
-		boolean actorCanMakeReaction = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(), relTypeCode, relId).isSuccess();
+		ResultData actorCanMakeReactionRd = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(), relTypeCode, relId);
 		
-		if (actorCanMakeReaction == false) {
-			return rq.jsHistoryBackOnView("싫어요는 한번만 누를 수 있어요!");
+		// 직접 도메인을 치고 올 경우 방어?..
+		if (actorCanMakeReactionRd.isFail()) {
+			return rq.jsHistoryBackOnView("아무런 리액션을 취하지 않았어요! 리액션 후 이용 가능합니다!");
 		}
-
+		
 		reactionPointService.addBadReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
 		
 		return rq.jsReplace("싫어요를 눌렀어요!", replaceUri);
@@ -64,11 +71,14 @@ public class UsrReactionPointController {
 	@ResponseBody
 	public String doDeleteBadReaction(String relTypeCode, int relId, String replaceUri) {
 		
-		boolean actorCanMakeReaction = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(), relTypeCode, relId).isSuccess();
+		ResultData actorCanMakeReactionRd = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(), relTypeCode, relId);
+		
+		// 직접 도메인을 치고 올 경우 방어?..
+		if (actorCanMakeReactionRd.isSuccess()) {
+			return rq.jsHistoryBackOnView(actorCanMakeReactionRd.getMsg());
+		}
 
-		reactionPointService.doDeleteBadReaction(rq.getLoginedMemberId(), relTypeCode, relId);
-
-		reactionPointService.getBadRpCount(relId);
+		reactionPointService.deleteBadRp(rq.getLoginedMemberId(), relTypeCode, relId);
 
 		return rq.jsReplace("싫어요를 취소했어요!", replaceUri);
 	}

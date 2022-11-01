@@ -312,6 +312,14 @@ CREATE TABLE reply (
 );
 
 
+# reply 테이블에 goodReactionPoint 칼럼 추가
+ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+# reply 테이블에 badReactionPoint 칼럼 추가
+ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+# reply 테이블에 index 걸기
+ALTER TABLE `SB_AM`.`reply` ADD INDEX (`relTypeCode` , `relId`); 
+
 SELECT * FROM article ORDER BY id DESC;
 SELECT * FROM board;
 SELECT * FROM `member`;

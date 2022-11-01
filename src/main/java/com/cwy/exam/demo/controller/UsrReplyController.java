@@ -36,19 +36,17 @@ public class UsrReplyController {
 		
 		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
 		
-		int id = (int) writeReplyRd.getData1();
+		int id = writeReplyRd.getData1();
 
 		if (Ut.empty(replaceUri)) {
 			switch(relTypeCode) {
 			case "article" :
-				replaceUri = Ut.f("../article/detail?id=%d", id);
+				replaceUri = Ut.f("../article/detail?id=%d", relId);
 				break;
 			}
 		}
-//		ResultData<Integer> writeReplyRd = 
 		
-		
-		return rq.jsReplace(Ut.f("댓글 등록이 완료 되었습니다."), Ut.f("../article/detail?id=%d", id));
+		return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
 	}
 	
 }

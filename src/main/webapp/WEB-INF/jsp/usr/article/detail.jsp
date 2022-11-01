@@ -162,37 +162,50 @@
 			</table>
 		</div>
 
-		<!-- 댓글 -->
+		<!-- 댓글 목록 -->
+		<div class="mt-5">
+			<div class="text-indigo-700"> 댓글 목록 <span class="badge badge-outline"> ${repliesCount } 개</span></div>
+			<c:forEach var="reply" items="${replies }">
+				<div class="text-green-600">${reply.id}</div>
+				<div class="text-green-600">${reply.regdate}</div>
+				<div>${reply.extra__writerName}</div>
+				<div>${reply.body}</div>		
+			</c:forEach>
+
+		</div>
+
+
+		<!-- 댓글 입력 -->
 		<div class="mt-5 overflow-x-auto">
 			<div class="text-indigo-700">댓글 작성</div>
 			<c:if test="${rq.logined }">
-			<form class="table-box-type-1 overflow-x-auto" method="POST" action="../reply/doWrite" 
-				onsubmit="ReplyWrite__submitForm(this); return false;">
-				<input type="hidden" name="relTypeCode" value="article"/>
-				<input type="hidden" name="relId" value="${param.id }"/>
-				  <table class="table table-zebra w-full text-sm">
-					<colgroup>
-						<col width="100" />
-					</colgroup>
-					<tbody>
-						<tr>
-							<th class="text-indigo-700">작성자</th>
-							<td>${rq.loginedMember.name }</td>
-						</tr>
-						<tr>
-							<th class="text-indigo-700">내용</th>
-							<td><textarea class="w-full input input-bordered" style="height: 100px;" type="text" name="body" placeholder="댓글을 입력해주세요" rows="5" /></textarea></td>
-						</tr>
-						<tr>
-							<th class="text-indigo-700"></th>
-							<td class=""><button class="btn btn-ghost btn-sm" type="submit" value="작성">댓글 작성</button></td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
+				<form class="table-box-type-1 overflow-x-auto" method="POST" action="../reply/doWrite" 
+					onsubmit="ReplyWrite__submitForm(this); return false;">
+					<input type="hidden" name="relTypeCode" value="article"/>
+					<input type="hidden" name="relId" value="${param.id }"/>
+					  <table class="table table-zebra w-full text-sm">
+						<colgroup>
+							<col width="100" />
+						</colgroup>
+						<tbody>
+							<tr>
+								<th class="text-indigo-700">작성자</th>
+								<td>${rq.loginedMember.name }</td>
+							</tr>
+							<tr>
+								<th class="text-indigo-700">내용</th>
+								<td><textarea class="w-full input input-bordered" style="height: 100px;" type="text" name="body" placeholder="댓글을 입력해주세요" rows="5" /></textarea></td>
+							</tr>
+							<tr>
+								<th class="text-indigo-700"></th>
+								<td class=""><button class="btn btn-ghost btn-sm" type="submit" value="작성">댓글 작성</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</c:if>
 			
 			<!-- 댓글 이용시 로그인여부 -->
-			</c:if>
 			<c:if test="${rq.notLogined }">
 			로그인 후 이용 할 수 있습니다.  
 				<a class="btn-text-link btn btn-ghost" href="/usr/member/login">로그인</a> 해 주세요!

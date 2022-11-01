@@ -33,4 +33,10 @@ public class ReplyService {
 		return replyRepository.getForPrintReplies(actorId, relTypeCode, relId);
 	}
 
+	public ResultData<Integer> deleteReply(int id) {
+		 replyRepository.deleteReply(id);
+		 
+		 return ResultData.from("S-2", Ut.f("%d번 댓글이 삭제되었습니다", id), "id", id);
+	}
+
 }

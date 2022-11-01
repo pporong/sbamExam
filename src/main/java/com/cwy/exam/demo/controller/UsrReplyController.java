@@ -19,11 +19,11 @@ public class UsrReplyController {
 	private ReplyService replyService;
 	@Autowired
 	private Rq rq;
-	
+
 	// 액션메서드
 	@RequestMapping("/usr/reply/doWrite")
 	public String doWrite(String relTypeCode, int relId, String body, String replaceUri) {
-		
+
 		if (Ut.empty(relTypeCode)) {
 			return rq.jsHistoryBack("relTypeCode 을(를) 입력 해 주세요. !!");
 		}
@@ -33,20 +33,30 @@ public class UsrReplyController {
 		if (Ut.empty(body)) {
 			return rq.jsHistoryBack("body 을(를) 입력 해 주세요. !!");
 		}
-		
+
 		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
-		
+
 		int id = writeReplyRd.getData1();
 
 		if (Ut.empty(replaceUri)) {
-			switch(relTypeCode) {
-			case "article" :
+			switch (relTypeCode) {
+			case "article":
 				replaceUri = Ut.f("../article/detail?id=%d", relId);
 				break;
 			}
 		}
-		
+
 		return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
 	}
-	
+
+	@RequestMapping("/usr/reply/doDelete")
+	@ResponseBody
+	public String doDelete(int id) {
+
+		replyService.deleteReply(id);
+
+			return rq.jsReplace(Ut.f("%d번 댓글을 삭제했습니다", id), "../article/list?boardId=1");
+
+
+	}
 }

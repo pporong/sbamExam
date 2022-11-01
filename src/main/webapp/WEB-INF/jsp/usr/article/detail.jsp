@@ -117,7 +117,7 @@
 					</tr>
 					<tr>
 						<th class="text-indigo-700">내용</th>
-						<td style="height: 250px;">${article.body }</td>
+						<td style="height: 250px;">${article.getForPrintBody() }</td>
 					</tr>
 					
 					<tr>
@@ -163,26 +163,55 @@
 		</div>
 
 		<!-- 댓글 목록 -->
-		<div class="mt-5">
-			<div class="text-indigo-700"> 댓글 목록 <span class="badge badge-outline"> ${repliesCount } 개</span></div>
-			<c:forEach var="reply" items="${replies }">
-				<div class="text-green-600">${reply.id}</div>
-				<div class="text-green-600">${reply.regdate}</div>
-				<div>${reply.extra__writerName}</div>
-				<div>${reply.body}</div>		
-			</c:forEach>
+		<div class="mt-5 ">
+				<div class="text-indigo-700"> 댓글 목록 <span class="badge badge-outline">${replies.size() }</span></div>
+				<div class="overflow-x-auto">
+			<table class="table table-compact w-full">
+				<colgroup align="center">
+					<col width="10%" />
+					<col width="20%" />
+					<col width="10%" />
+					<col width="50%" />
+					<col width="10%" />
+				</colgroup>
+				<thead>
+					<tr class="text-yellow-700 text-center">
+						<th>번호</th>
+						<th class="">날짜</th>
+						<th class="">작성자</th>
+						<th class="">내용</th>
+						<th class="">추천</th>
+						<th class="">삭제</th>
+						
+					</tr>
+				</thead>
+	
+				<tbody>
+					<c:forEach var="reply" items="${replies }" varStatus="status">
+						<tr class="hover text-center">
+							<td>${status.count}</td>
+							<td>${reply.getForPrintType1RegDate()}</td>
+							<td>${reply.extra__writerName}</td>
+							<td class="text-left">${reply.getForPrintBody()}</td>
+							<td>${reply.goodReactionPoint}</td>
+							<td><a class="btn-text-link " onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
+					href="../reply/doDelete?id=${reply.id }">삭제</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+	
+			</table>
 
 		</div>
-
 
 		<!-- 댓글 입력 -->
 		<div class="mt-5 overflow-x-auto">
 			<div class="text-indigo-700">댓글 작성</div>
-			<c:if test="${rq.logined }">
-				<form class="table-box-type-1 overflow-x-auto" method="POST" action="../reply/doWrite" 
-					onsubmit="ReplyWrite__submitForm(this); return false;">
+		<c:if test="${rq.logined }">
+			<form class="table-box-type-1" method="POST" action="../reply/doWrite"
+				onsubmit="ReplyWrite__submitForm(this); return false;">
 					<input type="hidden" name="relTypeCode" value="article"/>
-					<input type="hidden" name="relId" value="${param.id }"/>
+					<input type="hidden" name="relId" value="${article.id }"/>
 					  <table class="table table-zebra w-full text-sm">
 						<colgroup>
 							<col width="100" />
@@ -198,7 +227,7 @@
 							</tr>
 							<tr>
 								<th class="text-indigo-700"></th>
-								<td class=""><button class="btn btn-ghost btn-sm" type="submit" value="작성">댓글 작성</button></td>
+								<td class=""><button class="btn btn-ghost btn-sm" type="submit">댓글 작성</button></td>
 							</tr>
 						</tbody>
 					</table>

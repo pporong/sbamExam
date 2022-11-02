@@ -21,7 +21,7 @@ public class UsrReplyController {
 	private ReplyService replyService;
 	@Autowired
 	private Rq rq;
-	
+
 	@RequestMapping("/usr/reply/doWrite")
 	@ResponseBody
 	public String doWrite(String relTypeCode, int relId, String body, String replaceUri) {
@@ -35,7 +35,7 @@ public class UsrReplyController {
 			return rq.jsHistoryBack("body을(를) 입력해주세요");
 		}
 
-		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMember(), relTypeCode, relId, body);
+		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
 
 		int id = writeReplyRd.getData1();
 
@@ -50,22 +50,37 @@ public class UsrReplyController {
 		return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
 	}
 
-
+	// 삭제
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
 	public String doDelete(int id, String replaceUri) {
-		
-		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), id);
-		
-		if (reply.getMemberId() != rq.getLoginedMemberId()) {
+
+		if (Ut.empty(id)) {
+			return rq.jsHistoryBack(Ut.f("존재하지 않는 id입니다."));
+		}
+
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
+
+		if (reply == null) {
+			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
+		}
+		if (reply.isExtra__actorCanDelete() == false) {
 			return rq.jsHistoryBack(Ut.f("해당 댓글에 대한 삭제 권한이 없습니다."));
 		}
-		
-		replyService.deleteReply(id);
-		
-		return rq.jsReplace("해당 댓글을 삭제했습니다.", replaceUri);
 
+		ResultData<Integer> deleteReplyRd = replyService.deleteReply(id);
+
+		if (Ut.empty(replaceUri)) {
+			switch (reply.getRelTypeCode()) {
+			case "article":
+				replaceUri = Ut.f("../article/detail?id=%d", reply.getRelId());
+				break;
+			}
+
+			replyService.deleteReply(id);
+
+		}
+		return rq.jsReplace(deleteReplyRd.getMsg(), replaceUri);
 	}
-	
 
 }

@@ -21,7 +21,7 @@ public class ReplyService {
 		this.replyRepository = replyRepository;
 	}
 	
-	public ResultData<Integer> writeReply(Member actor, String relTypeCode, int relId, String body) {
+	public ResultData<Integer> writeReply(int actorId, String relTypeCode, int relId, String body) {
 		
 		replyRepository.writeReply(relTypeCode, relId, body);
 		
@@ -54,6 +54,7 @@ public class ReplyService {
 		
 	}
 
+	// 댓글 수정 권한 체크
 	public ResultData actorCanModify(Member actor, Reply reply) {
 		
 		if (reply == null) {
@@ -66,6 +67,7 @@ public class ReplyService {
 		return ResultData.from("S-1", "수정 가능");
 	}
 
+	// 댓글 삭제 권한 체크
 	public ResultData actorCanDelete(Member actor, Reply reply) {
 
 		if (reply == null) {
@@ -78,18 +80,21 @@ public class ReplyService {
 
 		return ResultData.from("S-1", "삭제 가능");
 	}
+	
 	// 댓글 삭제
 	public ResultData<Integer> deleteReply(int id) {
 		 replyRepository.deleteReply(id);
 		 
-		 return ResultData.from("S-2", Ut.f("%d번 댓글이 삭제되었습니다", id), "id", id);
+		 return ResultData.from("S-1", Ut.f("%d번 댓글이 삭제되었습니다", id), "id", id);
 	}
 
 	
 	// 댓글 하나만 가져오기
-	public Reply getForPrintReply(int actorId, int id) {
+	public Reply getForPrintReply(Member actor, int id) {
 		
 		Reply reply = replyRepository.getForPrintReply(id);
+		
+		updateForPrintData(actor, reply);
 		
 		return reply; 
 	}

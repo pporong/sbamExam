@@ -113,4 +113,13 @@ public interface ArticleRepository {
 	public int decreaseBadRp(int relId);
 	// 실헝요 취소 update
 
+	@Select("""
+			<script>
+				SELECT *
+				FROM article
+				WHERE id = #{id}
+			</script>
+				""")
+	public Article getArticle(int id);
+
 }

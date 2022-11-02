@@ -64,7 +64,6 @@ public interface ReplyRepository {
 			""")
 	public Reply getForPrintReply(int id);
 
-	void writeReply(String relTypeCode, int relId, String body);
 
 
 }

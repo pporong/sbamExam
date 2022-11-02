@@ -23,7 +23,7 @@ public class ReplyService {
 	
 	public ResultData<Integer> writeReply(int actorId, String relTypeCode, int relId, String body) {
 		
-		replyRepository.writeReply(relTypeCode, relId, body);
+		replyRepository.writeReply(actorId, relTypeCode, relId, body);
 		
 		int id = replyRepository.getLastInsertId();
 

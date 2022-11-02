@@ -197,9 +197,7 @@
 							<td class="text-left">${reply.getForPrintBody()}</td>
 							<td>${reply.goodReactionPoint}</td>
 							<td>
-								<c:if test="${reply.extra__actorCanModify}">
-									<a class="btn-text-link " href="../reply/doModify?id=${reply.id }">수정</a>
-								</c:if>
+									<a class="btn-text-link " href="../reply/modify?id=${reply.id }">수정</a>
 							</td>
 							<td>
 								<c:if test="${reply.extra__actorCanDelete}">

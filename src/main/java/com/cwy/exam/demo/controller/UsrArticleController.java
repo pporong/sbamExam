@@ -127,7 +127,7 @@ public class UsrArticleController {
 			return rq.jsHistoryBackOnView(Ut.f("%d번 게시물은 존재하지 않습니다", id));
 		}
 
-		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
+		ResultData<Integer> actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
 
 		if (actorCanModifyRd.isFail()) {
 			return rq.jsHistoryBackOnView(actorCanModifyRd.getMsg());
@@ -148,7 +148,7 @@ public class UsrArticleController {
 			return rq.jsHistoryBack(Ut.f("%d번 게시물은 존재하지 않습니다", id));
 		}
 
-		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
+		ResultData<Integer> actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
 
 		if (actorCanModifyRd.isFail()) {
 			return rq.jsHistoryBack(actorCanModifyRd.getMsg());

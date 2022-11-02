@@ -3,9 +3,39 @@
 <c:set var="pageTitle" value="ARTICLE MODIFY" />
 <%@ include file="../common/head.jspf"%>
 
+<script>
+	// 댓글 중복 submit 방지
+	let ArticleModify__submitFormDone = false;
+	
+	function ArticleModify__submitForm(form) {
+		
+		if (ArticleModify__submitFormDone) {
+			return;
+		}
+		
+		form.body.value = form.body.value.trim();
+		// 		if (form.body.value.length == 0) {
+		// 			alert('댓글을 입력해주세요');
+		// 			form.body.focus();
+		// 			return;
+		// 		}
+		
+		if (form.body.value.length < 2) {
+			alert('2글자 이상 입력해주세요');
+			form.body.focus();
+			return;
+		}
+		
+		ArticleModify__submitFormDone = true;
+		form.submit();
+	}
+
+</script>
+
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
-		<form class="table-box-type-1 overflow-x-auto" method="POST" action="../article/doModify">
+		<form class="table-box-type-1 overflow-x-auto" method="POST" action="../article/doModify"
+			onsubmit="ArticleModify__submit(this); return false;">
 			<input type="hidden" name="id" value="${article.id }" />
 			  <table class="table table-compact w-full">
 				<colgroup>

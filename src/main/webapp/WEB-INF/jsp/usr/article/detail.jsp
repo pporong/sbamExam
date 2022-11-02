@@ -172,7 +172,8 @@
 					<col width="20%" />
 					<col width="10%" />
 					<col width="50%" />
-					<col width="10%" />
+					<col width="5%" />
+					<col width="5%" />
 				</colgroup>
 				<thead>
 					<tr class="text-yellow-700 text-center">
@@ -181,6 +182,7 @@
 						<th class="">작성자</th>
 						<th class="">내용</th>
 						<th class="">추천</th>
+						<th class="">수정</th>
 						<th class="">삭제</th>
 						
 					</tr>
@@ -194,8 +196,17 @@
 							<td>${reply.extra__writerName}</td>
 							<td class="text-left">${reply.getForPrintBody()}</td>
 							<td>${reply.goodReactionPoint}</td>
-							<td><a class="btn-text-link " onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-					href="../reply/doDelete?id=${reply.id }">삭제</a></td>
+							<td>
+								<c:if test="${reply.extra__actorCanModify}">
+									<a class="btn-text-link " href="../reply/doModify?id=${reply.id }">수정</a>
+								</c:if>
+							</td>
+							<td>
+								<c:if test="${reply.extra__actorCanDelete}">
+									<a class="btn-text-link " onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
+									href="../reply/doDelete?id=${reply.id }">삭제</a>
+								</c:if>
+							</td>			
 						</tr>
 					</c:forEach>
 				</tbody>

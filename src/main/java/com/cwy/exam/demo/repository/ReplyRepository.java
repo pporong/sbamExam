@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.cwy.exam.demo.vo.Reply;
-import com.cwy.exam.demo.vo.ResultData;
 
 @Mapper
 public interface ReplyRepository {
@@ -44,7 +43,7 @@ public interface ReplyRepository {
 				ORDER BY R.id ASC
 			</script>
 			""")
-	List<Reply> getForPrintReplies(int actorId, String relTypeCode, int relId);
+	List<Reply> getForPrintReplies(String relTypeCode, int relId);
 
 	@Delete("""
 			<script>
@@ -53,7 +52,19 @@ public interface ReplyRepository {
 			</script>
 					""")
 	int deleteReply(int id);
+	
+	@Select("""
+			<script>
+				SELECT R.*, M.name AS extra__writerName
+				FROM reply AS R
+				LEFT JOIN `member` AS M
+				ON R.memberId = M.id
+				WHERE R.id = #{id}
+			</script>
+			""")
+	public Reply getForPrintReply(int id);
 
+	void writeReply(String relTypeCode, int relId, String body);
 
 
 }

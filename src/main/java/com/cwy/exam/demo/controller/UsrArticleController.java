@@ -59,7 +59,6 @@ public class UsrArticleController {
 	
 
 	@RequestMapping("/usr/article/write")
-
 	public String showWrite(String title, String body) {
 
 		return "usr/article/write";
@@ -110,7 +109,7 @@ public class UsrArticleController {
 		}
 
 		if (article.getMemberId() != rq.getLoginedMemberId()) {
-			return rq.jsHistoryBack(Ut.f("%d번 게시물에 대한 권한이 없습니다.", id));
+			return rq.jsHistoryBack(Ut.f("%d번 게시물에 대한 삭제 권한이 없습니다.", id));
 		}
 
 		articleService.deleteArticle(id);
@@ -168,7 +167,7 @@ public class UsrArticleController {
 
 		model.addAttribute("article", article);
 		
-		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMember(), "article", id);
 
 //		int repliesCount = replies.size();
 		

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cwy.exam.demo.service.ReplyService;
 import com.cwy.exam.demo.util.Ut;
 import com.cwy.exam.demo.vo.Article;
+import com.cwy.exam.demo.vo.Reply;
 import com.cwy.exam.demo.vo.ResultData;
 import com.cwy.exam.demo.vo.Rq;
 
@@ -34,7 +35,7 @@ public class UsrReplyController {
 			return rq.jsHistoryBack("body을(를) 입력해주세요");
 		}
 
-		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
+		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMember(), relTypeCode, relId, body);
 
 		int id = writeReplyRd.getData1();
 
@@ -52,12 +53,19 @@ public class UsrReplyController {
 
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
-	public String doDelete(int id) {
-
+	public String doDelete(int id, String replaceUri) {
+		
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), id);
+		
+		if (reply.getMemberId() != rq.getLoginedMemberId()) {
+			return rq.jsHistoryBack(Ut.f("해당 댓글에 대한 삭제 권한이 없습니다."));
+		}
+		
 		replyService.deleteReply(id);
-
-			return rq.jsReplace(Ut.f("%d번 댓글을 삭제했습니다", id), "../article/list?boardId=1");
-
+		
+		return rq.jsReplace("해당 댓글을 삭제했습니다.", replaceUri);
 
 	}
+	
+
 }

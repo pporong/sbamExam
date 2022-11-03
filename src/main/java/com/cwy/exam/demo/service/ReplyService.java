@@ -50,7 +50,7 @@ public class ReplyService {
 		reply.setExtra__actorCanDelete(actorCanDeleteRd.isSuccess());
 
 		ResultData actorCanModifyRd = actorCanModify(actor, reply);
-		reply.setExtra__actorCanDelete(actorCanModifyRd.isSuccess());
+		reply.setExtra__actorCanModify(actorCanModifyRd.isSuccess());
 		
 	}
 
@@ -65,6 +65,13 @@ public class ReplyService {
 		}
 
 		return ResultData.from("S-1", "수정 가능");
+	}
+
+	// 댓글 수정
+	public ResultData modifyReply(int id, String body) {
+		replyRepository.modifyReply(id, body);
+		 
+		 return ResultData.from("S-1", Ut.f("%d번 댓글이 수정되었습니다", id), "id", id);
 	}
 
 	// 댓글 삭제 권한 체크
@@ -88,7 +95,6 @@ public class ReplyService {
 		 return ResultData.from("S-1", Ut.f("%d번 댓글이 삭제되었습니다", id), "id", id);
 	}
 
-	
 	// 댓글 하나만 가져오기
 	public Reply getForPrintReply(Member actor, int id) {
 		
@@ -98,7 +104,5 @@ public class ReplyService {
 		
 		return reply; 
 	}
-
-	
 
 }

@@ -55,34 +55,69 @@ public class UsrReplyController {
 	@RequestMapping("/usr/reply/modify")
 	public String modify(int id, String replaceUri, Model model) {
 
+		if (Ut.empty(id)) {
+			return rq.jsHistoryBack("해당 id는 존재하지 않습니다.");
+		}
+
 		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
 
 		if (reply == null) {
-			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
+			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다", id));
 		}
+
 		if (reply.isExtra__actorCanModify() == false) {
-			return rq.jsHistoryBack(Ut.f("해당 댓글에 대한 수정 권한이 없습니다."));
+			return rq.jsHistoryBack("해당 댓글에 대한 수정 권한이 없습니다.");
 		}
 
 		String relDataTitle = null;
-		
-		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMember(), reply);
-		
-			switch (reply.getRelTypeCode()) {
-			case "article":
-				Article article = articleService.getArticle(reply.getRelId());
-				relDataTitle = article.getTitle();
-				break;
-			}
 
-		if (actorCanModifyRd.isFail()) {
-			return rq.jsHistoryBackOnView(actorCanModifyRd.getMsg());
+		switch (reply.getRelTypeCode()) {
+		case "article":
+			Article article = articleService.getArticle(reply.getRelId());
+			relDataTitle = article.getTitle();
+			break;
 		}
 
 		model.addAttribute("reply", reply);
 		model.addAttribute("relDataTitle", relDataTitle);
 
-		return "usr/reply/reModify";
+		return "usr/reply/modify";
+	}
+	
+	// 수정
+	@RequestMapping("/usr/reply/doModify")
+	@ResponseBody
+	public String doModify(int id, String body, String replaceUri) {
+
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
+
+		if (Ut.empty(id)) {
+			return rq.jsHistoryBack(Ut.f("존재하지 않는 id입니다."));
+		}
+		
+		if (reply == null) {
+			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다", id));
+		}
+		if (Ut.empty(body)) {
+			return rq.jsHistoryBack("!! 수정 내용을 입력 해 주세요. !!");
+		}
+
+		if (reply.isExtra__actorCanModify() == false) {
+			return rq.jsHistoryBack(Ut.f("해당 댓글에 대한 수정 권한이 없습니다."));
+		}
+
+		ResultData modifyReplyRd = replyService.modifyReply(id, body);
+
+		if (Ut.empty(replaceUri)) {
+			switch (reply.getRelTypeCode()) {
+			case "article":
+				replaceUri = Ut.f("../article/detail?id=%d", reply.getRelId());
+				break;
+			}
+
+		}
+
+		return rq.jsReplace(modifyReplyRd.getMsg(), replaceUri);
 	}
 
 	// 삭제

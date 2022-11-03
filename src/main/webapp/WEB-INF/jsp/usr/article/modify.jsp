@@ -4,32 +4,23 @@
 <%@ include file="../common/head.jspf"%>
 
 <script>
-	// 댓글 중복 submit 방지
-	let ArticleModify__submitFormDone = false;
-	
-	function ArticleModify__submitForm(form) {
-		
-		if (ArticleModify__submitFormDone) {
+	let ArticleModify__submitDone = false;
+	function ArticleModify__submit(form) {
+		if (ArticleModify__submitDone) {
 			return;
 		}
 		
 		form.body.value = form.body.value.trim();
-		// 		if (form.body.value.length == 0) {
-		// 			alert('댓글을 입력해주세요');
-		// 			form.body.focus();
-		// 			return;
-		// 		}
 		
-		if (form.body.value.length < 2) {
-			alert('2글자 이상 입력해주세요');
+		if (form.body.value.length == 0) {
+			alert('내용을 입력해주세요');
 			form.body.focus();
 			return;
 		}
 		
-		ArticleModify__submitFormDone = true;
+		ArticleModify__submitDone = true;
 		form.submit();
 	}
-
 </script>
 
 <section class="mt-8 text-xl">

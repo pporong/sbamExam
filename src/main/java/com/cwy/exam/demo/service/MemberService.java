@@ -52,4 +52,10 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 
+//	public void modifyMyInfo(String loginPw, String nickname, String cellphoneNum,
+//			String email) {
+//		return memberRepository.modifyMyInfo(loginPw, nickname, cellphoneNum, email);
+//		
+//	}
+
 }

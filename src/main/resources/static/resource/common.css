@@ -60,7 +60,7 @@ html > body {
 }
 
 /*라이브러리*/
-.table-box-type-1>table {
+.table-box-type-1> table {
 	width: 100%;
 }
 
@@ -79,9 +79,17 @@ html > body {
 	text-decoration: underline;
 }
 
-.table-box-type-2>table th{
-	text-align: center;
+.center-box {
+	position: relative;
 }
+.center-box-box {
+	position: absolute;
+	 top : 50%;
+  	left : 50%;
+  transform : translate(-50%,-50%);
+}
+
+
 
 /* 커스텀 */
 body {

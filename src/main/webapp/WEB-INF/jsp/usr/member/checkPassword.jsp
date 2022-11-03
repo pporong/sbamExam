@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="LOGIN" />
+<c:set var="pageTitle" value="PASSWORD CHECK" />
 <%@ include file="../common/head.jspf"%>
 
 <section class="mt-8 text-xl ">
 	<div class="container mx-auto px-3 ">
-		<form class="" method="POST" action="../member/doLogin">
+		<form class="" method="POST" action="../member/doCheckPw">
+		<input type="hidden" name="replaceUri" value="${param.replaceUri }" />
 			<div class="">
 				<table class="table table-compact w-full">
 					<colgroup>
@@ -14,17 +15,18 @@
 	
 					<tbody>
 						<tr>
-							<th>▶ 아이디</th>
-							<td><input class="w-96" name="loginId" type="text" placeholder="아이디를 입력해주세요" /></td>
+							<th>▶ 아이디 </th>
+							<td>${rq.loginedMember.loginId }</td>
 						</tr>
 						<tr>
-							<th>▶ 비밀번호</th>
-							<td><input class="w-96" name="loginPw" type="text" placeholder="비밀번호를 입력해주세요" /></td>
+							<th>▶ 비밀번호 확인 </th>
+							<td><input required="required"  class="w-96" name="loginPw" type="password" placeholder="비밀번호를 입력해주세요" /></td>
 						</tr>
 						<tr>
 							<th></th>
-							<td><button class="btn btn-ghost btn-sm btn-outline" type="submit" value="로그인" />로그인</button></td>
+							<td><button class="btn btn-ghost btn-sm btn-outline" type="submit" value="비밀번호 확인" />비밀번호 확인</button></td>
 						</tr>
+
 					</tbody>
 				</table>
 			</div>

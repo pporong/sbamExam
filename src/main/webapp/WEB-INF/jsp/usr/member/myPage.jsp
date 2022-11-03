@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="MY PAGE" />
+<c:set var="pageTitle" value="MY" />
 <%@ include file="../common/head.jspf"%>
+<%@ page import="com.cwy.exam.demo.util.Ut"%>
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
@@ -37,7 +38,7 @@
 					</tr>
 					<tr>
 						<th></th>
-						<td><a href="../usr/member/checkPassword" class="btn btn-outline btn-ghost btn-sm">회원정보 수정</a></td>
+						<td><a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify') }" class="btn btn-outline btn-ghost btn-sm">회원 정보 수정</a></td>
 					</tr>
 				</tbody>
 			</table>

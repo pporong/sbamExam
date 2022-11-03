@@ -16,6 +16,7 @@ import com.cwy.exam.demo.vo.Rq;
 @Controller
 public class UsrMemberController {
 
+	private static final String String = null;
 	@Autowired
 	private MemberService memberService;
 	@Autowired
@@ -113,5 +114,25 @@ public class UsrMemberController {
 
 		return "usr/member/myPage";
 	}
+	
+	@RequestMapping("usr/member/checkPassword")
+	public String shoWCheckPassword() {
 
+		return "usr/member/checkPassword";
+	}
+
+	@RequestMapping("usr/member/doCheckPw")
+	@ResponseBody
+	public String doCheckPw(String loginPw, String replaceUri) {
+		
+		if (Ut.empty(loginPw)) {
+			return rq.jsHistoryBack("!! 비밀번호를 입력 해 주세요. !!");
+		}
+		
+		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+			return Ut.jsHistoryBack("!! 비밀번호가 일치하지 않습니다. !!");
+		}
+		
+		return "usr/member/modifyMyinfo";
+	}
 }

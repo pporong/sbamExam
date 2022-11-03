@@ -81,7 +81,7 @@ public class UsrReplyController {
 		model.addAttribute("reply", reply);
 		model.addAttribute("relDataTitle", relDataTitle);
 
-		return "usr/reply/modify";
+		return "usr/reply/reModify";
 	}
 	
 	// 수정

@@ -51,12 +51,6 @@
 						</td>
 					</tr>
 					<tr>
-						<th>번호</th>
-						<td>
-							<div class="badge">${reply.id }</div>
-						</td>
-					</tr>
-					<tr>
 						<th>작성날짜</th>
 						<td>${reply.regDate }</td>
 					</tr>
@@ -68,12 +62,14 @@
 						<th>작성자</th>
 						<td>${reply.extra__writerName }</td>
 					</tr>
+				<%--	
 					<tr>
 						<th>추천</th>
 						<td>
 							<span class="badge ">${reply.goodReactionPoint }</span>
 						</td>
 					</tr>
+				--%>
 					<tr>
 						<th>내용</th>
 						<td>
@@ -83,7 +79,7 @@
 					<tr>
 						<th></th>
 						<td>
-							<button class="btn btn-active btn-ghost" type="submit" value="수정" />
+							<button class="btn btn-ghost btn-text-link btn-active" type="submit" value="수정" />
 							수정
 							</button>
 						</td>

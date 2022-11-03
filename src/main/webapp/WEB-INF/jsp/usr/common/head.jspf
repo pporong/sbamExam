@@ -55,13 +55,18 @@
 				</c:if>
 				<c:if test="${rq.isLogined()}">
 					<li class="hover:underline">
+						<a class="h-full px-3 flex items-center" href="/usr/article/write">
+							<span>WRITE</span>
+						</a>
+					</li>
+					<li class="hover:underline">
 						<a class="h-full px-3 flex items-center" onclick="if(confirm('정말 로그아웃하시겠습니까?') == false) return false;"  href="/usr/member/doLogout">
 							<span>LOGOUT</span>
 						</a>
 					</li>					
 					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="/usr/article/write">
-							<span>WRITE</span>
+						<a class="h-full px-3 flex items-center" href="/usr/member/myPage">
+							<span>MY PAGE</span>
 						</a>
 					</li>
 				</c:if>

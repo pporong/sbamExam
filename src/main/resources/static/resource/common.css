@@ -79,8 +79,8 @@ html > body {
 	text-decoration: underline;
 }
 
-.table-box-type-2>table th, .table-box-type-2>table td {
-	border : 1px solid yellow;
+.table-box-type-2>table th{
+	text-align: center;
 }
 
 /* 커스텀 */

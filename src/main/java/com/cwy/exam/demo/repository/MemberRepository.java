@@ -47,4 +47,12 @@ public interface MemberRepository {
 				""")
 	Member getMemberByNameAndEmail(String name, String email);
 
+	@Select("""
+			
+			SELECT M.name AS extra__writerName
+			FROM `member` AS M
+			WHERE M.id = #{id}
+				""")
+	Member getLoginedMemberName(int id);
+
 }

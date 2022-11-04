@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.cwy.exam.demo.vo.Member;
+import com.cwy.exam.demo.vo.Reply;
 
 @Mapper
 public interface MemberRepository {
@@ -55,12 +56,34 @@ public interface MemberRepository {
 								""")
 	Member getLoginedMemberName(int id);
 
-	
+	@Select("""
+				SELECT M.*
+				FROM `member` AS M
+				WHERE M.id = #{id}
+								""")
+	public Member getForPrintMember(int id);
 	
 	@Update("""
-			
-			
-			""")
-	void modifyMyInfo(String loginPw, String nickname, String cellphoneNum, String email);
+			<script>
+			UPDATE `member`
+			<set>
+				updateDate = NOW(),
+				<if test="loginPw != null">
+					loginPw = #{loginPw},
+				</if>
+				<if test="nickname != null">
+					nickname = #{nickname},
+				</if>
+				<if test="cellphoneNum != null">
+					cellphoneNum = #{cellphoneNum},
+				</if>
+				<if test="email != null">
+					email = #{email}
+				</if>
+			</set>
+			WHERE id = #{id};
+			</script>
+				""")
+	void modifyMyInfo(int id, String loginPw, String nickname, String cellphoneNum, String email);
 
 }

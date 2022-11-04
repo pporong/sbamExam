@@ -8,7 +8,7 @@
 		<form class="" method="POST" action="../member/doCheckPw">
 		<input type="hidden" name="replaceUri" value="${param.replaceUri }" />
 			<div class="">
-				<table class="table table-compact w-full">
+				<table class="table table-compact w-full center-box ">
 					<colgroup>
 						<col width="200" />
 					</colgroup>

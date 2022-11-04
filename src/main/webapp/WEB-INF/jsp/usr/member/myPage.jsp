@@ -6,7 +6,7 @@
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
-			 <table class="table table-compact w-full">
+			 <table class="table table-compact w-full center-box">
 				<colgroup>
 					<col width="200" />
 				</colgroup>
@@ -38,15 +38,18 @@
 					</tr>
 					<tr>
 						<th></th>
-						<td><a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify') }" class="btn btn-outline btn-ghost btn-sm">회원 정보 수정</a></td>
+						<td><a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modifyMyInfo') }" 
+						class="btn btn-outline btn-ghost btn-sm">회원 정보 수정</a></td>
 					</tr>
 				</tbody>
 			</table>
+			<div class="container mx-auto btns flex justify-end">
+				<button class="btn-text-link btn btn-outline btn-sm"" type="button" onclick="history.back();">뒤로가기</button>
+			</div>
 	</div>
 
-	<div class="container mx-auto btns flex justify-end">
-		<button class="btn-text-link btn btn-outline btn-sm"" type="button" onclick="history.back();">뒤로가기</button>
-	</div>
 
+
+	
 </section>
 <%@ include file="../common/foot.jspf"%>

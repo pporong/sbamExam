@@ -7,7 +7,7 @@
 	<div class="container mx-auto px-3 ">
 		<form class="" method="POST" action="../member/doLogin">
 			<div class="">
-				<table class="table table-compact w-full">
+				<table class="table table-compact w-full center-box">
 					<colgroup>
 						<col width="200" />
 					</colgroup>

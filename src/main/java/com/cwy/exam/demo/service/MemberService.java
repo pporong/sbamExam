@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.cwy.exam.demo.repository.MemberRepository;
 import com.cwy.exam.demo.util.Ut;
 import com.cwy.exam.demo.vo.Member;
+import com.cwy.exam.demo.vo.Reply;
 import com.cwy.exam.demo.vo.ResultData;
 
 @Service
@@ -52,10 +53,19 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 
-//	public void modifyMyInfo(String loginPw, String nickname, String cellphoneNum,
-//			String email) {
-//		return memberRepository.modifyMyInfo(loginPw, nickname, cellphoneNum, email);
-//		
-//	}
+	public  ResultData modifyMyInfo(int id, String loginPw, String nickname, String cellphoneNum, String email) {
+		
+		memberRepository.modifyMyInfo(id, loginPw, nickname, cellphoneNum, email);
+		
+		return ResultData.from("S-1", "회원 정보 변경 성공!");
+		
+	}
+	
+	public Member getForPrintMember(Member loginedMember, int id) {
+
+		Member member = memberRepository.getForPrintMember(id);
+		
+		return member;
+	}
 
 }

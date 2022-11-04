@@ -1,7 +1,5 @@
 package com.cwy.exam.demo.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,10 +43,7 @@ public class UsrMemberController {
 		if (Ut.empty(email)) {
 			return ResultData.from("F-6", "이메일을 입력해주세요");
 		}
-		// S-1
-		// 회원가입이 완료되었습니다
-		// F-1~8
-		// 실패
+
 		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
 
 		if (joinRd.isFail()) {
@@ -133,6 +128,53 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("!! 비밀번호가 일치하지 않습니다. !!");
 		}
 		
-		return "usr/member/modifyMyinfo";
+		return rq.jsReplace("", replaceUri);
+	}
+	
+	@RequestMapping("usr/member/modifyMyInfo")
+	public String modifyMyInfo() {
+		
+		return "usr/member/modifyMyInfo";
+		
+	}
+	
+	// 개인정보수정
+	@RequestMapping("usr/member/doModifyMyInfo")
+	@ResponseBody
+	public String doModifyMyInfo(String loginPw, String nickname, String cellphoneNum, String email) {
+
+		Member member = memberService.getForPrintMember(rq.getLoginedMember(), rq.getLoginedMemberId());
+		
+//		if(Ut.empty(loginPw)) {
+//			loginPw = member.getLoginPw();
+//		}
+//		if(Ut.empty(nickname)) {
+//			nickname = member.getNickname();
+//		}
+//		if(Ut.empty(cellphoneNum)) {
+//			nickname = member.getCellphoneNum();
+//		}
+//		if(Ut.empty(email)) {
+//			nickname = member.getEmail();
+//		}
+		
+		
+		if(Ut.empty(loginPw)) {
+			loginPw = member.getLoginPw();
+		}
+		if (Ut.empty(nickname)) {
+			return rq.jsHistoryBack("닉네임을 입력해주세요");
+		}
+		if (Ut.empty(cellphoneNum)) {
+			return rq.jsHistoryBack("전화번호를 입력해주세요");
+		}
+		if (Ut.empty(email)) {
+			return rq.jsHistoryBack("이메일을 입력해주세요");
+		}
+		
+		ResultData modifyMyInfoRd = memberService.modifyMyInfo(rq.getLoginedMemberId(), loginPw, nickname, cellphoneNum, email);
+
+		return Ut.jsReplace(modifyMyInfoRd.getMsg(), "/");
+		
 	}
 }

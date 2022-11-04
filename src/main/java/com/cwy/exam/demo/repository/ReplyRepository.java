@@ -21,7 +21,7 @@ public interface ReplyRepository {
 				memberId = #{actorId},
 				relTypeCode = 'article',
 				relId =  #{relId},
-				`body` = #{body};
+				`body` = #{body}
 			</script>	
 					""")
 	void writeReply(int actorId, String relTypeCode, int relId, String body);

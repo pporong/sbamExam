@@ -128,6 +128,14 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("!! 비밀번호가 일치하지 않습니다. !!");
 		}
 		
+//		memberModifyAuthKey
+		
+		if(replaceUri.equals("../member/doCheckPw")) {
+			String memberModifyAuthKey = memberService.genMemberModifyAuthKey(rq.getLoginedMemberId());
+
+			replaceUri += "?memberModifyAuthKey=" + memberModifyAuthKey;
+		}
+		
 		return rq.jsReplace("", replaceUri);
 	}
 	

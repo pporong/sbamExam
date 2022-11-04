@@ -1,5 +1,6 @@
 package com.cwy.exam.demo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cwy.exam.demo.repository.MemberRepository;
@@ -11,9 +12,11 @@ import com.cwy.exam.demo.vo.ResultData;
 @Service
 public class MemberService {
 	private MemberRepository memberRepository;
+	private AttrService attrService;
 
-	public MemberService(MemberRepository memberRepository) {
+	public MemberService(MemberRepository memberRepository, AttrService attrService) {
 		this.memberRepository = memberRepository;
+		this.attrService = attrService;
 	}
 
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
@@ -53,7 +56,7 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 
-	public  ResultData modifyMyInfo(int id, String loginPw, String nickname, String cellphoneNum, String email) {
+	public ResultData modifyMyInfo(int id, String loginPw, String nickname, String cellphoneNum, String email) {
 		
 		memberRepository.modifyMyInfo(id, loginPw, nickname, cellphoneNum, email);
 		
@@ -68,4 +71,11 @@ public class MemberService {
 		return member;
 	}
 
+	public String genMemberModifyAuthKey(int actorId) {
+		String memberModifyAuthKey = Ut.getTempPassword(10);
+
+		attrService.setValue("member", actorId, "extra", "memberModifyAuthKey", memberModifyAuthKey,
+				Ut.getDateStrLater(60 * 5));
+
+		return memberModifyAuthKey;
 }

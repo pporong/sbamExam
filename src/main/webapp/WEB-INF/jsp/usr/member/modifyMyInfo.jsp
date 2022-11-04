@@ -104,7 +104,7 @@
 						<td>${rq.loginedMember.cellphoneNum }</td>
 					</tr>
 					<tr>
-						<th class="text-red-600">	▷ 변경 할 전화 번호 </th>
+						<th class="text-red-600">▷ 변경 할 전화 번호 </th>
 						<td><input class="w-96" name="cellphoneNum" type="text" placeholder="전화번호를 입력해주세요" /></td>
 					</tr>
 					<tr>

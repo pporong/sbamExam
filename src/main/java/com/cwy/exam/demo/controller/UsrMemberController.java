@@ -128,19 +128,29 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("!! 비밀번호가 일치하지 않습니다. !!");
 		}
 		
-//		memberModifyAuthKey
-		
-		if(replaceUri.equals("../member/doCheckPw")) {
+		// memberModifyAuthKey
+		if (replaceUri.equals("../member/modifyMyInfo")) {
 			String memberModifyAuthKey = memberService.genMemberModifyAuthKey(rq.getLoginedMemberId());
 
 			replaceUri += "?memberModifyAuthKey=" + memberModifyAuthKey;
 		}
+
 		
 		return rq.jsReplace("", replaceUri);
 	}
 	
 	@RequestMapping("usr/member/modifyMyInfo")
-	public String modifyMyInfo() {
+	public String modifyMyInfo(String memberModifyAuthKey) {
+		
+		if (Ut.empty(memberModifyAuthKey)) {
+			return rq.jsHistoryBackOnView("!! 회원 수정 인증코드가 필요합니다. !!");
+		}
+		
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
+		
+		if(checkMemberModifyAuthKeyRd.isFail()) {
+			return rq.jsHistoryBackOnView(checkMemberModifyAuthKeyRd.getMsg());
+		}
 		
 		return "usr/member/modifyMyInfo";
 		
@@ -149,23 +159,19 @@ public class UsrMemberController {
 	// 개인정보수정
 	@RequestMapping("usr/member/doModifyMyInfo")
 	@ResponseBody
-	public String doModifyMyInfo(String loginPw, String nickname, String cellphoneNum, String email) {
+	public String doModifyMyInfo(String memberModifyAuthKey, String loginPw, String nickname, String cellphoneNum, String email) {
 
+		if (Ut.empty(memberModifyAuthKey)) {
+			return rq.jsHistoryBack("!! 회원 수정 인증코드가 필요합니다. !!");
+		}
+		
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
+		
+		if(checkMemberModifyAuthKeyRd.isFail()) {
+			return rq.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
+		}
+		
 		Member member = memberService.getForPrintMember(rq.getLoginedMember(), rq.getLoginedMemberId());
-		
-//		if(Ut.empty(loginPw)) {
-//			loginPw = member.getLoginPw();
-//		}
-//		if(Ut.empty(nickname)) {
-//			nickname = member.getNickname();
-//		}
-//		if(Ut.empty(cellphoneNum)) {
-//			nickname = member.getCellphoneNum();
-//		}
-//		if(Ut.empty(email)) {
-//			nickname = member.getEmail();
-//		}
-		
 		
 		if(Ut.empty(loginPw)) {
 			loginPw = member.getLoginPw();

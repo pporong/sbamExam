@@ -1,12 +1,10 @@
 package com.cwy.exam.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cwy.exam.demo.repository.MemberRepository;
 import com.cwy.exam.demo.util.Ut;
 import com.cwy.exam.demo.vo.Member;
-import com.cwy.exam.demo.vo.Reply;
 import com.cwy.exam.demo.vo.ResultData;
 
 @Service
@@ -36,7 +34,7 @@ public class MemberService {
 		}
 
 		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNum, email);
-		
+
 		int id = memberRepository.getLastInsertId();
 
 		return ResultData.from("S-1", "회원가입이 완료되었습니다", "id", id);
@@ -57,17 +55,17 @@ public class MemberService {
 	}
 
 	public ResultData modifyMyInfo(int id, String loginPw, String nickname, String cellphoneNum, String email) {
-		
+
 		memberRepository.modifyMyInfo(id, loginPw, nickname, cellphoneNum, email);
-		
+
 		return ResultData.from("S-1", "회원 정보 변경 성공!");
-		
+
 	}
-	
+
 	public Member getForPrintMember(Member loginedMember, int id) {
 
 		Member member = memberRepository.getForPrintMember(id);
-		
+
 		return member;
 	}
 
@@ -78,4 +76,16 @@ public class MemberService {
 				Ut.getDateStrLater(60 * 5));
 
 		return memberModifyAuthKey;
+	}
+
+	public ResultData checkMemberModifyAuthKey(int actorId, String memberModifyAuthKey) {
+		
+		String saved = attrService.getValue("member", actorId, "extra", "memberModifyAuthKey");
+		
+		if(!saved.equals(memberModifyAuthKey)) {
+			return ResultData.from("F-1", "!! 인증코드가 일치하지 않거나 만료된 코드입니다. !!");
+		}
+		
+		return ResultData.from("S-1", "인증코드가 일치합니다.");		
+	}
 }

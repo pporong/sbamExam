@@ -59,8 +59,8 @@
 	<div class="container mx-auto px-3">
 		<form class="" method="POST" action="../member/doModifyMyInfo" onsubmit="MemberModify__submit(this); return false;">
 <%-- 		<input type="hidden" name="replaceUri" value="${param.replaceUri }" /> --%>
-<%-- 		<input type="hidden" name="id" value="${member.id }" /> 
-		<input type="hidden" name="loginPw" value="${member.loginPw }" /> --%>
+			<input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey }" /> 
+<%-- 		<input type="hidden" name="loginPw" value="${member.loginPw }" /> --%>
 			 <table class="table table-compact w-full center-box">
 				<colgroup>
 					<col width="200" />
@@ -92,35 +92,18 @@
 						<td>${rq.loginedMember.name }</td>
 					</tr>
 					<tr>
-						<th class="">▶ 현재 닉네임 </th>
-						<td>${rq.loginedMember.nickname }</td>
+						<th class="text-green-600">▷ 닉네임 </th>
+						<td><input value="${rq.loginedMember.nickname }" class="w-96" name="nickname" type="text" placeholder="닉네임을 입력해주세요" /></td>
 					</tr>
 					<tr>
-						<th class="text-red-600">▷ 변경 할 닉네임 </th>
-						<td><input class="w-96" name="nickname" type="text" placeholder="닉네임을 입력해주세요" /></td>
+						<th class="text-green-600">▷ 전화 번호 </th>
+						<td><input value="${rq.loginedMember.cellphoneNum }" class="w-96" name="cellphoneNum" type="text" placeholder="전화번호를 입력해주세요" /></td>
 					</tr>
 					<tr>
-						<th class="">▶ 현재 전화 번호 </th>
-						<td>${rq.loginedMember.cellphoneNum }</td>
-					</tr>
-					<tr>
-						<th class="text-red-600">▷ 변경 할 전화 번호 </th>
-						<td><input class="w-96" name="cellphoneNum" type="text" placeholder="전화번호를 입력해주세요" /></td>
-					</tr>
-					<tr>
-						<th class="">▶ 현재 이메일</th>
-						<td>${rq.loginedMember.email }</td>
-					</tr>
-					<tr>
-						<th class="text-red-600">▷ 변경 할 이메일 </th>
-						<td><input class="w-96" name="email" type="text" placeholder="이메일을 입력해주세요" /></td>
+						<th class="text-green-600">▷ 이메일</th>
+						<td><input value="${rq.loginedMember.email }" class="w-96" name="email" type="text" placeholder="이메일을 입력해주세요" /></td>
 					</tr>
 
-<%-- 					<tr>
-						<th></th>
-						<td><a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify') }" 
-						class="btn btn-outline btn-ghost btn-sm">회원 정보 수정 완료</a></td>
-					</tr> --%>
 					<tr class="">
 						<th></th>
 						<td class="">

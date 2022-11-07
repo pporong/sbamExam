@@ -146,9 +146,10 @@ public class UsrMemberController {
 			return rq.jsHistoryBackOnView("!! 회원 수정 인증코드가 필요합니다. !!");
 		}
 		
-		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
-		
-		if(checkMemberModifyAuthKeyRd.isFail()) {
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
+				memberModifyAuthKey);
+
+		if (checkMemberModifyAuthKeyRd.isFail()) {
 			return rq.jsHistoryBackOnView(checkMemberModifyAuthKeyRd.getMsg());
 		}
 		
@@ -165,16 +166,18 @@ public class UsrMemberController {
 			return rq.jsHistoryBack("!! 회원 수정 인증코드가 필요합니다. !!");
 		}
 		
-		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
-		
-		if(checkMemberModifyAuthKeyRd.isFail()) {
+
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
+				memberModifyAuthKey);
+
+		if (checkMemberModifyAuthKeyRd.isFail()) {
 			return rq.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
 		}
 		
 		Member member = memberService.getForPrintMember(rq.getLoginedMember(), rq.getLoginedMemberId());
 		
 		if(Ut.empty(loginPw)) {
-			loginPw = member.getLoginPw();
+			loginPw = null;
 		}
 		if (Ut.empty(nickname)) {
 			return rq.jsHistoryBack("닉네임을 입력해주세요");

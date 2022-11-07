@@ -86,6 +86,6 @@ public class MemberService {
 			return ResultData.from("F-1", "!! 인증코드가 일치하지 않거나 만료된 코드입니다. !!");
 		}
 		
-		return ResultData.from("S-1", "인증코드가 일치합니다.");		
+		return ResultData.from("S-1", "정상 코드입니다");
 	}
 }

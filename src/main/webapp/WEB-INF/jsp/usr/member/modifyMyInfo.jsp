@@ -58,9 +58,7 @@
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<form class="" method="POST" action="../member/doModifyMyInfo" onsubmit="MemberModify__submit(this); return false;">
-<%-- 		<input type="hidden" name="replaceUri" value="${param.replaceUri }" /> --%>
-			<input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey }" /> 
-<%-- 		<input type="hidden" name="loginPw" value="${member.loginPw }" /> --%>
+			<input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey }" />
 			 <table class="table table-compact w-full center-box">
 				<colgroup>
 					<col width="200" />

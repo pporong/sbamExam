@@ -2,25 +2,38 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="ARTICLE MODIFY" />
 <%@ include file="../common/head.jspf"%>
+<%@ include file="../common/toastUiLib.jspf"%>
 
 <script>
-	let ArticleModify__submitDone = false;
-	function ArticleModify__submit(form) {
-		if (ArticleModify__submitDone) {
-			return;
-		}
-		
-		form.body.value = form.body.value.trim();
-		
-		if (form.body.value.length == 0) {
-			alert('내용을 입력해주세요');
-			form.body.focus();
-			return;
-		}
-		
-		ArticleModify__submitDone = true;
-		form.submit();
+
+let ArticleModify__submitDone = false;
+
+function ArticleModify__submit(form) {
+	
+	if (ArticleModify__submitDone) {
+		return;
 	}
+	
+	 if(form.title.value == 0){
+		    alert('제목을 입력해주세요');
+		    return;
+		  }
+	 
+	const editor = $(form).find('.toast-ui-editor').data('data-toast-editor');
+	
+	const markdown = editor.getMarkdown().trim();
+	
+	if (markdown.length == 0) {
+		alert('내용을 입력해주세요');
+		editor.focus();
+		return;
+	}
+	
+	form.body.value = markdown;
+	ArticleModify__submitDone = true;
+	
+	form.submit();
+}
 </script>
 
 <section class="mt-8 text-xl">
@@ -28,6 +41,7 @@
 		<form class="table-box-type-1 overflow-x-auto" method="POST" action="../article/doModify"
 			onsubmit="ArticleModify__submit(this); return false;">
 			<input type="hidden" name="id" value="${article.id }" />
+			<input type="hidden" name="body" />
 			  <table class="table table-compact w-full">
 				<colgroup>
 					<col width="200" />
@@ -60,26 +74,23 @@
 					</tr>
 					<tr>
 						<th class="text-indigo-700">내용</th>
-						<td><textarea class="w-full input input-bordered" style="height: 400px;" type="text" name="body" placeholder="내용을 입력해주세요" />${article.body }</textarea></td>
+						<td>
+							<div class="toast-ui-editor">
+								<script type="text/x-template">${article.body}</script>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<th class="text-indigo-700"></th>
-						<td><button type="submit" value="수정" />수정</button></td>
+						<td><button class="btn btn-text-link btn-sm btn-ghost" type="submit" value="수정">수정</button></td>
 					</tr>
 				</tbody>
 
 			</table>
 		</form>
 
-		<div class="btns flex justify-end">
+		<div class="btns flex justify-end my-3">
 			<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
-			<c:if test="${article.extra__actorCanModify }">
-				<a class="btn-text-link btn btn-outline btn-sm" href="../article/modify?id=${article.id }">수정</a>
-			</c:if>
-			<c:if test="${article.extra__actorCanDelete }">
-				<a class="btn-text-link btn btn-outline btn-sm" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-				   href="../article/doDelete?id=${article.id }">삭제</a>
-			</c:if>
 		</div>
 	</div>
 </section>

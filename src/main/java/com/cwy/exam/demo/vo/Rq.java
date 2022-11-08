@@ -119,9 +119,4 @@ public class Rq {
 		System.out.println("B 호출 완");	
 	}
 
-	// 해당 메서드는 Rq 객체의 생성을 유도 -> 지우면 기능 오류 발생 / 삭제 금지, 편의를 위해 호출해줘야함
-//	public void initOnBeforeActionInterceptor() {
-//
-//	}
-
 }

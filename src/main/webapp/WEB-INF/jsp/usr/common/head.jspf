@@ -19,6 +19,7 @@
 
 <!-- 내가 만든 css -->
 <link rel="stylesheet" href="/resource/common.css" />
+<link rel="shortcut icon" href="/favicon-m.ico" />
 <script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>

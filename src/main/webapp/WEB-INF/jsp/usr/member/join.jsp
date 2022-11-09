@@ -76,7 +76,7 @@
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
-		<form class="" method="POST" action="../member/doModifyMyInfo" onsubmit="MemberJoin__submit(this); return false;">
+		<form class="" method="POST" action="../member/doJoin" onsubmit="MemberJoin__submit(this); return false;">
 			 <table class="table table-compact w-full center-box">
 				<colgroup>
 					<col width="200" />

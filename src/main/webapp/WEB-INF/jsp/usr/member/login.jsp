@@ -6,6 +6,7 @@
 <section class="mt-8 text-xl ">
 	<div class="container mx-auto px-3 ">
 		<form class="" method="POST" action="../member/doLogin">
+		<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri }" />
 			<div class="">
 				<table class="table table-compact w-full center-box">
 					<colgroup>
@@ -32,7 +33,7 @@
 	</div>
 
 	<div class="container mx-auto btns flex justify-end">
-		<button class="btn-text-link btn btn-outline btn-sm"" type="button" onclick="history.back();">뒤로가기</button>
+		<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
 	</div>
 
 </section>

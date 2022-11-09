@@ -20,6 +20,7 @@ public class UsrMemberController {
 	@Autowired
 	private Rq rq;
 
+	// join
 	@RequestMapping("usr/member/doJoin")
 	@ResponseBody
 	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
@@ -54,7 +55,14 @@ public class UsrMemberController {
 
 		return ResultData.newData(joinRd, "member", member);
 	}
+	
+	@RequestMapping("usr/member/join")
+	public String showJoin() {
+		return "usr/member/join";
+	}
 
+	
+	// login
 	@RequestMapping("usr/member/login")
 	public String showLogin() {
 		return "usr/member/login";
@@ -173,8 +181,6 @@ public class UsrMemberController {
 		if (checkMemberModifyAuthKeyRd.isFail()) {
 			return rq.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
 		}
-		
-		Member member = memberService.getForPrintMember(rq.getLoginedMember(), rq.getLoginedMemberId());
 		
 		if(Ut.empty(loginPw)) {
 			loginPw = null;

@@ -119,4 +119,9 @@ public class Rq {
 		System.out.println("B 호출 완");	
 	}
 
+	public void printReplaceJs(String msg, String url) {
+		resp.setContentType("text/html; charset=UTF-8");
+		print(Ut.jsReplace(msg, url));
+	}
+
 }

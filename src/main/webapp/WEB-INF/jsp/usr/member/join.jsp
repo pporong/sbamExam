@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="MODIFY MY INFORMATION" />
+<c:set var="pageTitle" value="MEMBER JOIN" />
 <%@ include file="../common/head.jspf"%>
 <%@ page import="com.cwy.exam.demo.util.Ut"%>
 
 <script>
-	let MemberModify__submitDone = false;
-	function MemberModify__submit(form) {
+	let MemberJoin__submitDone = false;
+	function MemberJoin__submit(form) {
 		
-		if (MemberModify__submitDone) {
+		if (MemberJoin__submitDone) {
 			return;
 		}
 		
@@ -28,7 +28,24 @@
 				return;
 			}
 		}
-		
+		form.loginId.value = form.nickname.value.trim();
+		if (form.nickname.value.length == 0) {
+			alert('아이디를 입력해주세요');
+			form.nickname.focus();
+			return;
+		}
+		form.loginPw.value = form.nickname.value.trim();
+		if (form.nickname.value.length == 0) {
+			alert('비밀번호를 입력해주세요');
+			form.nickname.focus();
+			return;
+		}
+		form.name.value = form.nickname.value.trim();
+		if (form.nickname.value.length == 0) {
+			alert('이름을 입력해주세요');
+			form.nickname.focus();
+			return;
+		}
 		form.nickname.value = form.nickname.value.trim();
 		if (form.nickname.value.length == 0) {
 			alert('닉네임을 입력해주세요');
@@ -49,6 +66,8 @@
 			form.email.focus();
 			return;
 		}
+		
+
 		 
 		MemberModify__submitDone = true;
 		form.submit();
@@ -57,57 +76,49 @@
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
-		<form class="" method="POST" action="../member/doModifyMyInfo" onsubmit="MemberModify__submit(this); return false;">
-			<input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey }" />
+		<form class="" method="POST" action="../member/doModifyMyInfo" onsubmit="MemberJoin__submit(this); return false;">
 			 <table class="table table-compact w-full center-box">
 				<colgroup>
 					<col width="200" />
 				</colgroup>
 
 				<tbody>
-					<tr>
-						<th class=>▶ 아이디 </th>
-						<td>${rq.loginedMember.loginId }</td>
+					<tr class="hover">
+						<th>▶ 아이디 </th>
+						<td><input class="w-96" name="loginId" type="text" placeholder="아이디를 입력 해 주세요." /></td>
 					</tr>
 									
-					<tr>
-						<th class="">▶  비밀번호 변경 </th>
+					<tr class="hover">
+						<th class="">▶ 비밀번호 </th>
+						<td><input class="w-96" name="loginPw" type="password" placeholder="비밀번호를 입력해주세요" /></td>
 					</tr>
 					<tr class="hover">
-						<th class="text-red-600">▷ 새 비밀번호 </th>
-						<td><input class="w-96" name="loginPw" type="password" placeholder="새로운 비밀번호를 입력해주세요" /></td>
-					</tr>
-					<tr class="hover">
-						<th class="text-red-600">▷ 새 비밀번호 확인</th>
-						<td><input class="w-96" name="loginPwConfirm" type="password" placeholder="새로운 비밀번호를 다시 한 번 입력해주세요" /></td>
+						<th class="">▶ 비밀번호 확인 </th>
+						<td><input class="w-96" name="loginPwConfirm" type="password" placeholder="비밀번호를 다시 한 번 입력해주세요" /></td>
 					</tr> 
-					<tr>
-						<th class="">▶ 가입 날짜 </th>
-						<td>${rq.loginedMember.regDate }</td>
-					</tr>
-					<tr>
+					<tr class="hover">
 						<th class="">▶ 이름 </th>
-						<td>${rq.loginedMember.name }</td>
+						<td><input class="w-96" name="name" type="text" placeholder="이름을 입력 해 주세요." /></td>
 					</tr>
 					<tr class="hover">
-						<th class="text-green-600">▷ 닉네임 </th>
-						<td><input value="${rq.loginedMember.nickname }" class="w-96" name="nickname" type="text" placeholder="닉네임을 입력해주세요" /></td>
+						<th class="">▶ 닉네임 </th>
+						<td><input class="w-96" name="nickname" type="text" placeholder="닉네임을 입력해주세요" /></td>
 					</tr>
 					<tr class="hover">
-						<th class="text-green-600">▷ 전화 번호 </th>
-						<td><input value="${rq.loginedMember.cellphoneNum }" class="w-96" name="cellphoneNum" type="text" placeholder="전화번호를 입력해주세요" /></td>
+						<th class="">▶ 전화 번호 </th>
+						<td><input class="w-96" name="cellphoneNum" type="text" placeholder="전화번호를 입력해주세요" /></td>
 					</tr>
 					<tr class="hover">
-						<th class="text-green-600">▷ 이메일</th>
-						<td><input value="${rq.loginedMember.email }" class="w-96" name="email" type="text" placeholder="이메일을 입력해주세요" /></td>
+						<th class="">▶ 이메일 </th>
+						<td><input class="w-96" name="email" type="text" placeholder="이메일을 입력해주세요" /></td>
 					</tr>
 
 					<tr class="">
 						<th></th>
 						<td class="">
 							<button class="btn btn-ghost btn-sm btn-outline" 
-							onclick="if(confirm('변경 내용이 정확합니까?') == false) return false;" 
-							type="submit" value="회원 정보 수정">회원 정보 수정 완료</button>
+							onclick="if(confirm('입력 내용이 정확합니까?') == false) return false;" 
+							type="submit" value="회원 가입">회원 가입</button>
 						</td>
 					</tr>
 				</tbody>

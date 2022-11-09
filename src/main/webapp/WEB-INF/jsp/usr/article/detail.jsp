@@ -166,6 +166,7 @@
 
 			</table>
 		</div>
+		<!-- 게시글 수정, 삭제 -->
 		<div class="btns my-3 flex justify-end">
 			<c:if test="${article.extra__actorCanModify }">
 				<a class="btn-text-link btn btn-outline btn-sm" href="../article/modify?id=${article.id }">수정</a>
@@ -176,8 +177,8 @@
 				>삭제</a>
 			</c:if>
 		</div>
-<!-- 댓글 세션 -->
-
+		
+	<!-- 댓글 세션 -->
 		<!-- 댓글 목록 -->
 		<div class="mt-5 ">
 				<div class="text-indigo-700"> 댓글 목록 <span class="badge badge-outline">${replies.size() }</span></div>
@@ -231,7 +232,7 @@
 
 		</div>
 
-		<!-- 댓글 입력 -->
+		<!-- 댓글 작성 -->
 		<div class="mt-5 overflow-x-auto">
 			<div class="text-indigo-700">댓글 작성</div>
 		<c:if test="${rq.logined }">
@@ -264,7 +265,7 @@
 			<!-- 댓글 이용시 로그인여부 -->
 			<c:if test="${rq.notLogined }">
 			로그인 후 이용 할 수 있습니다.  
-				<a class="btn-text-link btn btn-ghost" href="/usr/member/login">로그인</a> 해 주세요!
+				<a class="btn-text-link btn btn-ghost btn-sm" href="/usr/member/login">로그인</a> 해 주세요!
 			</c:if>
 		</div>
 		 	 

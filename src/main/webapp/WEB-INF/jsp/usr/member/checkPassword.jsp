@@ -24,7 +24,7 @@
 						</tr>
 						<tr>
 							<th></th>
-							<td><button class="btn btn-ghost btn-sm btn-outline" type="submit" value="비밀번호 확인" />비밀번호 확인</button></td>
+							<td><button class="btn btn-ghost btn-sm btn-outline" type="submit" value="비밀번호 확인">비밀번호 확인</button></td>
 						</tr>
 
 					</tbody>
@@ -34,7 +34,7 @@
 	</div>
 
 	<div class="container mx-auto btns flex justify-end">
-		<button class="btn-text-link btn btn-outline btn-sm"" type="button" onclick="history.back();">뒤로가기</button>
+		<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
 	</div>
 
 </section>

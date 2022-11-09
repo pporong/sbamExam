@@ -12,27 +12,27 @@
 				</colgroup>
 
 				<tbody>
-					<tr>
+					<tr class="hover">
 						<th class=>▶ 아이디 </th>
 						<td>${rq.loginedMember.loginId }</td>
 					</tr>
-					<tr>
+					<tr class="hover">
 						<th class="">▶ 가입 날짜</th>
 						<td>${rq.loginedMember.regDate }</td>
 					</tr>
-					<tr>
+					<tr class="hover">
 						<th class="">▶ 이름</th>
 						<td>${rq.loginedMember.name }</td>
 					</tr>
-					<tr>
+					<tr class="hover">
 						<th class="">▶ 닉네임</th>
 						<td>${rq.loginedMember.nickname }</td>
 					</tr>
-					<tr>
+					<tr class="hover">
 						<th class="">▶ 전화 번호</th>
 						<td>${rq.loginedMember.cellphoneNum }</td>
 					</tr>
-					<tr>
+					<tr class="hover">
 						<th class="">▶ 이메일</th>
 						<td>${rq.loginedMember.email }</td>
 					</tr>

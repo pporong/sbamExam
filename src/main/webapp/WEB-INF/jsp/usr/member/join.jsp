@@ -14,6 +14,7 @@
 		
 		form.loginPw.value = form.loginPw.value.trim();
 		if (form.loginPwConfirm.value.length > 0) {
+			
 			form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
 			
 			if (form.loginPwConfirm.value.length == 0) {
@@ -28,22 +29,22 @@
 				return;
 			}
 		}
-		form.loginId.value = form.nickname.value.trim();
-		if (form.nickname.value.length == 0) {
+		form.loginId.value = form.loginId.value.trim();
+		if (form.loginId.value.length == 0) {
 			alert('아이디를 입력해주세요');
-			form.nickname.focus();
+			form.loginId.focus();
 			return;
 		}
-		form.loginPw.value = form.nickname.value.trim();
-		if (form.nickname.value.length == 0) {
+		form.loginPw.value = form.loginPw.value.trim();
+		if (form.loginPw.value.length == 0) {
 			alert('비밀번호를 입력해주세요');
-			form.nickname.focus();
+			form.loginPw.focus();
 			return;
 		}
-		form.name.value = form.nickname.value.trim();
-		if (form.nickname.value.length == 0) {
+		form.name.value = form.name.value.trim();
+		if (form.name.value.length == 0) {
 			alert('이름을 입력해주세요');
-			form.nickname.focus();
+			form.name.focus();
 			return;
 		}
 		form.nickname.value = form.nickname.value.trim();
@@ -86,8 +87,7 @@
 					<tr class="hover">
 						<th>▶ 아이디 </th>
 						<td><input class="w-96" name="loginId" type="text" placeholder="아이디를 입력 해 주세요." /></td>
-					</tr>
-									
+					</tr>	
 					<tr class="hover">
 						<th class="">▶ 비밀번호 </th>
 						<td><input class="w-96" name="loginPw" type="password" placeholder="비밀번호를 입력해주세요" /></td>

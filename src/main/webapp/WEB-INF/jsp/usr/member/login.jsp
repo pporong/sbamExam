@@ -14,17 +14,17 @@
 					</colgroup>
 	
 					<tbody>
-						<tr>
+						<tr class="hover">
 							<th>▶ 아이디</th>
 							<td><input class="w-96" name="loginId" type="text" placeholder="아이디를 입력해주세요" /></td>
 						</tr>
-						<tr>
+						<tr class="hover">
 							<th>▶ 비밀번호</th>
 							<td><input class="w-96" name="loginPw" type="text" placeholder="비밀번호를 입력해주세요" /></td>
 						</tr>
-						<tr>
+						<tr class="">
 							<th></th>
-							<td><button class="btn btn-ghost btn-sm btn-outline" type="submit" value="로그인" />로그인</button></td>
+							<td><button class="btn btn-ghost btn-sm btn-outline" type="submit" value="로그인">로그인</button></td>
 						</tr>
 					</tbody>
 				</table>

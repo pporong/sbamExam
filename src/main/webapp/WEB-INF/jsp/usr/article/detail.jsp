@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <c:set var="pageTitle" value="ARTICLE DETAIL" />
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/toastUiLib.jspf"%>
@@ -34,7 +35,6 @@
 		// 실전코드
  		ArticleDetail__increaseHitCount();
 	});
-
 </script> 
 
 <!-- 댓글 function -->
@@ -64,7 +64,6 @@
 		ReplyWrite__submitFormDone = true;
 		form.submit();
 	}
-
 </script>
 
 <section class="mt-8 text-xl">
@@ -251,7 +250,7 @@
 							</tr>
 							<tr>
 								<th class="text-indigo-700">내용</th>
-								<td><textarea class="w-full input input-bordered" style="height: 100px;" type="text" name="body" placeholder="댓글을 입력해주세요" rows="5" /></textarea></td>
+								<td><textarea class="w-full input input-bordered" style="height: 100px;" name="body" placeholder="댓글을 입력해주세요" rows="5" /></textarea></td>
 							</tr>
 							<tr>
 								<th class="text-indigo-700"></th>
@@ -265,7 +264,7 @@
 			<!-- 댓글 이용시 로그인여부 -->
 			<c:if test="${rq.notLogined }">
 			로그인 후 이용 할 수 있습니다.  
-				<a class="btn-text-link btn btn-ghost btn-sm" href="/usr/member/login">로그인</a> 해 주세요!
+				<a class="btn-text-link btn btn-ghost btn-sm" href="${rq.loginUri}">로그인</a> 해 주세요!
 			</c:if>
 		</div>
 		 	 
@@ -274,6 +273,7 @@
 			<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
 		</div>
 	</div>
+</div>
 </section>
 
 <%@ include file="../common/foot.jspf"%>

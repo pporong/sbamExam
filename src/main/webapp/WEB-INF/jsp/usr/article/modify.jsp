@@ -42,6 +42,7 @@ function ArticleModify__submit(form) {
 			onsubmit="ArticleModify__submit(this); return false;">
 			<input type="hidden" name="id" value="${article.id }" />
 			<input type="hidden" name="body" />
+			<input type="hidden" name="replaceUri" value="${param.replaceUri }" />
 			  <table class="table table-compact w-full">
 				<colgroup>
 					<col width="200" />
@@ -90,7 +91,7 @@ function ArticleModify__submit(form) {
 		</form>
 
 		<div class="btns flex justify-end my-3">
-			<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
+			<a class="btn-text-link btn btn-outline btn-sm" href="${param.replaceUri }">뒤로가기</a>
 		</div>
 	</div>
 </section>

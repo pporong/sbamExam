@@ -170,68 +170,66 @@
 		<!-- 게시글 수정, 삭제 버튼 -->
 		<div class="btns my-3 flex justify-end">
 			<c:if test="${article.extra__actorCanModify }">
-				<a class="btn-text-link btn btn-outline btn-sm mx-1" href="../article/modify?id=${article.id }">수정</a>
+				<a class="btn-text-link btn btn-outline btn-sm mx-1" href="../article/modify?id=${article.id }&replaceUri=${rq.encodedCurrentUri}">수정</a>
 			</c:if>
 			<c:if test="${article.extra__actorCanDelete }">
 				<a class="btn-text-link btn btn-outline btn-sm " onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-					href="../article/doDelete?id=${article.id }"
-				>삭제</a>
+					href="../article/doDelete?id=${article.id }&replaceUri=${rq.encodedCurrentUri}">삭제</a>
 			</c:if>
 		</div>
 		
 	<!-- 댓글 세션 -->
 		<!-- 댓글 목록 -->
 		<div class="mt-5 ">
-				<div class="text-indigo-700"> 댓글 목록 <span class="badge badge-outline">${replies.size() }</span></div>
-				<div class="overflow-x-auto">
-			<table class="table table-compact w-full">
-				<colgroup align="center">
-					<col width="10%" />
-					<col width="20%" />
-					<col width="10%" />
-					<col width="50%" />
-					<col width="5%" />
-					<col width="5%" />
-				</colgroup>
-				<thead>
-					<tr class="text-yellow-700 text-center">
-						<th>번호</th>
-						<th class="">날짜</th>
-						<th class="">작성자</th>
-						<th class="">내용</th>
-						<th class="">추천</th>
-						<th class="">수정</th>
-						<th class="">삭제</th>
-						
-					</tr>
-				</thead>
-	
-				<tbody>
-					<c:forEach var="reply" items="${replies }" varStatus="status">
-						<tr class="hover text-center">
-							<td>${status.count}</td>
-							<td>${reply.getForPrintType1RegDate()}</td>
-							<td>${reply.extra__writerName}</td>
-							<td class="text-left">${reply.getForPrintBody()}</td>
-							<td>${reply.goodReactionPoint}</td>
-							<td>
-								<c:if test="${reply.extra__actorCanModify }">
-									<a class="btn-text-link" href="../reply/modify?id=${reply.id }">수정</a>
-								</c:if>
-							</td>
-							<td>
-								<c:if test="${reply.extra__actorCanDelete}">
-									<a class="btn-text-link " onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-									href="../reply/doDelete?id=${reply.id }">삭제</a>
-								</c:if>
-							</td>			
+			<div class="text-indigo-700"> 댓글 목록 <span class="badge badge-outline">${replies.size() }</span></div>
+			<div class="overflow-x-auto">
+				<table class="table table-compact w-full">
+					<colgroup align="center">
+						<col width="10%" />
+						<col width="20%" />
+						<col width="10%" />
+						<col width="50%" />
+						<col width="5%" />
+						<col width="5%" />
+					</colgroup>
+					<thead>
+						<tr class="text-yellow-700 text-center">
+							<th>번호</th>
+							<th class="">날짜</th>
+							<th class="">작성자</th>
+							<th class="">내용</th>
+							<th class="">추천</th>
+							<th class="">수정</th>
+							<th class="">삭제</th>
+							
 						</tr>
-					</c:forEach>
-				</tbody>
-	
-			</table>
+					</thead>
+		
+					<tbody>
+						<c:forEach var="reply" items="${replies }" varStatus="status">
+							<tr class="hover text-center">
+								<td>${status.count}</td>
+								<td>${reply.getForPrintType1RegDate()}</td>
+								<td>${reply.extra__writerName}</td>
+								<td class="text-left">${reply.getForPrintBody()}</td>
+								<td>${reply.goodReactionPoint}</td>
+								<td>
+									<c:if test="${reply.extra__actorCanModify }">
+										<a class="btn-text-link"href="../reply/modify?id=${reply.id }&replaceUri=${rq.encodedCurrentUri}">수정</a>
+									</c:if>
+								</td>
+								<td>
+									<c:if test="${reply.extra__actorCanDelete}">
+										<a class="btn-text-link " onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
+										href="../reply/doDelete?id=${reply.id }&replaceUri=${rq.encodedCurrentUri}">삭제</a>
+									</c:if>
+								</td>			
+							</tr>
+						</c:forEach>
+					</tbody>
 
-		</div>
+				</table>
+			</div>
 
 		<!-- 댓글 작성 -->
 		<div class="mt-5 overflow-x-auto">
@@ -241,6 +239,7 @@
 				onsubmit="ReplyWrite__submitForm(this); return false;">
 					<input type="hidden" name="relTypeCode" value="article"/>
 					<input type="hidden" name="relId" value="${article.id }"/>
+					<input type="hidden" name="replaceUri" value="${rq.currentUri }"/>
 					  <table class="table table-zebra w-full text-sm">
 						<colgroup>
 							<col width="100" />

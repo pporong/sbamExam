@@ -104,10 +104,10 @@
 						<th class="text-indigo-700">현재 추천수</th>
 						<td>
 							<span class=" gap-2 btn-sm mx-2 btn-like" onclick=""> 👍 좋아요 
-								<div class="badge badge-secondary"> ${article.goodReactionPoint}</div>
+								<span class="badge badge-secondary"> ${article.goodReactionPoint}</span>
 							</span>
 							<span class=" gap-2 btn-sm btn-hate"> 👎 싫어요 
-		 						 <div class="badge"> ${article.badReactionPoint}</div>
+		 						 <span class="badge"> ${article.badReactionPoint}</span>
 		 					</span>
 						</td>
 					</tr>

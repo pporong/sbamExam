@@ -13,14 +13,15 @@
 				<div> 게시물 갯수 : <span class="badge"> ${articlesCount } 개</span></div>
 				<div class="flex-grow"></div>
 			</div>
-				<div class="search-box">
-				<!-- 검색 박스 -->
+			
+			<!-- 검색 박스 -->
+			<div class="search-box">
 				<form name="search">
 					<table class="">
 						<tr>
 							<td>
 								<select class="text-center" name="boardId" data-value="${param.boardId}">
- 									<option value="" selected="${param.boardId}" >게시판 선택</option>
+	 								<option value="" selected="${param.boardId}" >게시판 선택</option>
 									<option value="1">공 지 사 항</option>
 									<option value="2">자 유 게 시 판</option>
 								</select>
@@ -40,9 +41,10 @@
 				</form>	
 			</div>
 		</div>
+		
 		<!-- 게시물 리스트 -->
 		<div class="table-box-type-1 overflow-x-auto">
-			  <table class="table table-compact w-full">
+			<table class="table table-compact w-full">
 				<colgroup>
 					<col width="80" />
 					<col width="140" />
@@ -61,7 +63,7 @@
 						<th>추천</th>
 					</tr>
 				</thead>
-
+	
 				<tbody>
 					<c:forEach var="article" items="${articles }">
 						<tr>
@@ -74,38 +76,39 @@
 						</tr>
 					</c:forEach>
 				</tbody>
-
 			</table>
-			
- 		<div class="page-menu flex justify-center">
-	 		<div class="btn-group mx-0 my-10 grid grid-cols-2">
-				<c:set var="pageMenuLen" value="6" />
-				<c:set var="startPage" value="${page - pageMenuLen >= 1 ? page- pageMenuLen : 1}" />
-				<c:set var="endPage" value="${page + pageMenuLen <= pagesCount ? page + pageMenuLen : pagesCount}" />
 				
-				<c:set var="pageBaseUri" value="?boardId=${boardId }" />
-				<c:set var="pageBaseUri" value="${pageBaseUri }&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
-				<c:set var="pageBaseUri" value="${pageBaseUri }&searchKeyword=${param.searchKeyword}" />
-				
-				<c:if test="${startPage > 1}">
-					<a class="btn btn-sm" href="${pageBaseUri }&page=1">1</a>
-					<c:if test="${startPage > 2}">
-						<a class="btn btn-sm btn-disabled">...</a>
+			<!-- 게시물 리스팅 -->	
+	 		<div class="page-menu flex justify-center">
+		 		<div class="btn-group mx-0 my-10 grid grid-cols-2">
+					<c:set var="pageMenuLen" value="6" />
+					<c:set var="startPage" value="${page - pageMenuLen >= 1 ? page- pageMenuLen : 1}" />
+					<c:set var="endPage" value="${page + pageMenuLen <= pagesCount ? page + pageMenuLen : pagesCount}" />
+					
+					<c:set var="pageBaseUri" value="?boardId=${boardId }" />
+					<c:set var="pageBaseUri" value="${pageBaseUri }&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
+					<c:set var="pageBaseUri" value="${pageBaseUri }&searchKeyword=${param.searchKeyword}" />
+					
+					<c:if test="${startPage > 1}">
+						<a class="btn btn-sm" href="${pageBaseUri }&page=1">1</a>
+						<c:if test="${startPage > 2}">
+							<a class="btn btn-sm btn-disabled">...</a>
+						</c:if>
 					</c:if>
-				</c:if>
-				<c:forEach begin="${startPage }" end="${endPage }" var="i">
-					<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="${pageBaseUri }&page=${i }">${i }</a>
-				</c:forEach>
-				<c:if test="${endPage < pagesCount}">
-					<c:if test="${endPage < pagesCount - 1}">
-						<a class="btn btn-sm btn-disabled">...</a>
+					<c:forEach begin="${startPage }" end="${endPage }" var="i">
+						<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="${pageBaseUri }&page=${i }">${i }</a>
+					</c:forEach>
+					<c:if test="${endPage < pagesCount}">
+						<c:if test="${endPage < pagesCount - 1}">
+							<a class="btn btn-sm btn-disabled">...</a>
+						</c:if>
+						<a class="btn btn-sm" href="${pageBaseUri }&page=${pagesCount }">${pagesCount }</a>
 					</c:if>
-					<a class="btn btn-sm" href="${pageBaseUri }&page=${pagesCount }">${pagesCount }</a>
-				</c:if>
-
+	
+				</div>
 			</div>
 		</div>
-		
 	</div>
 </section>
+
 <%@ include file="../common/foot.jspf"%>

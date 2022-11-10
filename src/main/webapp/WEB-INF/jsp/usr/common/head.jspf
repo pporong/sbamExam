@@ -76,7 +76,7 @@
 						</a>
 					</li>
 					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" onclick="if(confirm('정말 로그아웃하시겠습니까?') == false) return false;"  href="/usr/member/doLogout">
+						<a class="h-full px-3 flex items-center" onclick="if(confirm('정말 로그아웃하시겠습니까?') == false) return false;"  href="${rq.logoutUri}">
 							<span>LOGOUT</span>
 						</a>
 					</li>	

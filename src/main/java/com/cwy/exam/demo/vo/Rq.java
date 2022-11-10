@@ -128,17 +128,38 @@ public class Rq {
 		
 		String requestUri = req.getRequestURI();
 		
+		// login 후 다시 돌아가면 안 되는 url
 		switch(requestUri) {
 		// login 시 계속 접근 할 수 없는 page
 		case "/usr/member/login" :
-		// 로그인 버튼 누른 후 join 버튼 누르면 err 발생
-		// case "/usr/member/join" :
+		// login 버튼 누른 후 join 버튼 누르면 err 발생
+//		case "/usr/member/join" :
 		case "/usr/member/findLoginId" :
 		case "/usr/member/findLoginPw" :
-			return Ut.getUriEncoded(paramMap.get("afterLoginUri"));
+			return Ut.getUriEncoded(Ut.getAttr(paramMap, "afterLoginUri", ""));
 		}
 		
 		return getEncodedCurrentUri();
 	}
+	
+	public String getLogoutUri() {
+		
+		String requestUri = req.getRequestURI();
+		
+		switch(requestUri) {
+		// logout 시 계속 접근 할 수 없는 page
+		case "/usr/article/write" :
+		case "/usr/article/modify" :
+		case "/usr/member/myPage" :
+			return "../member/doLogout?afterLogoutUri=" + "/";
+		}
+		
+		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
+	}	
+
+	public String getAfterLogoutUri() {	
+		return getEncodedCurrentUri();
+	}
+	
 
 }

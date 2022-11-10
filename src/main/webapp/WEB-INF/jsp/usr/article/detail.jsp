@@ -69,7 +69,9 @@
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1 overflow-x-auto">
-			  <table class="table table-compact w-full">
+		
+			<!-- 게시글 상세페이지 -->
+			<table class="table table-compact w-full">
 				<colgroup>
 					<col width="200" />
 				</colgroup>
@@ -165,13 +167,13 @@
 
 			</table>
 		</div>
-		<!-- 게시글 수정, 삭제 -->
+		<!-- 게시글 수정, 삭제 버튼 -->
 		<div class="btns my-3 flex justify-end">
 			<c:if test="${article.extra__actorCanModify }">
-				<a class="btn-text-link btn btn-outline btn-sm" href="../article/modify?id=${article.id }">수정</a>
+				<a class="btn-text-link btn btn-outline btn-sm mx-1" href="../article/modify?id=${article.id }">수정</a>
 			</c:if>
 			<c:if test="${article.extra__actorCanDelete }">
-				<a class="btn-text-link btn btn-outline btn-sm" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
+				<a class="btn-text-link btn btn-outline btn-sm " onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
 					href="../article/doDelete?id=${article.id }"
 				>삭제</a>
 			</c:if>
@@ -267,11 +269,16 @@
 				<a class="btn-text-link btn btn-ghost btn-sm" href="${rq.loginUri}">로그인</a> 해 주세요!
 			</c:if>
 		</div>
-		 	 
-		<!-- 뒤로가기, 삭제 버튼 -->
-		<div class="btns my-3 flex justify-end">
+	</div>
+	
+	<!-- 뒤로가기 버튼 -->
+	<div class="btns my-3 flex justify-end">
+		<c:if test="${empty param.listUri}">
 			<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
-		</div>
+		</c:if>
+		<c:if test="${not empty param.listUri}">
+			<a class="btn-text-link btn btn-outline btn-sm" href="${param.listUri }" > 뒤로가기</a>
+		</c:if>
 	</div>
 </div>
 </section>

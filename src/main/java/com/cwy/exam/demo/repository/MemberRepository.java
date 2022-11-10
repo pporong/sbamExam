@@ -86,4 +86,14 @@ public interface MemberRepository {
 				""")
 	void modifyMyInfo(int id, String loginPw, String nickname, String cellphoneNum, String email);
 
+	@Select("""
+			<script>
+			SELECT A.*, M.name AS extra__writerName
+			FROM article AS A
+			LEFT JOIN `member` AS M
+			ON A.memberId = M.id
+			WHERE 1 AND A.memberId = #{M.loginId}
+			</script>
+								""")
+	Member getArticleByMemberId();
 }

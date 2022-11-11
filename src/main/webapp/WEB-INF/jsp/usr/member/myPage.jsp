@@ -43,8 +43,8 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="container mx-auto btns flex justify-end">
-				<button class="btn-text-link btn btn-outline btn-sm"" type="button" onclick="history.back();">뒤로가기</button>
+			<div class="container mx-auto btns flex justify-end my-3">
+				<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
 			</div>
 	</div>
 

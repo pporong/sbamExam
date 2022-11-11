@@ -78,7 +78,7 @@
 				</tbody>
 			</table>
 				
-			<!-- 게시물 리스팅 -->	
+			<!-- 게시물 페이징 -->	
 	 		<div class="page-menu flex justify-center">
 		 		<div class="btn-group mx-0 my-10 grid grid-cols-2">
 					<c:set var="pageMenuLen" value="6" />

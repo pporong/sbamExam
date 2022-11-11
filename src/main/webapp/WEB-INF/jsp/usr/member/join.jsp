@@ -12,6 +12,19 @@
 			return;
 		}
 		
+		form.loginId.value = form.loginId.value.trim();
+		if (form.loginId.value.length == 0) {
+			alert('아이디를 입력해주세요');
+			form.loginId.focus();
+			return;
+		}
+		form.loginPw.value = form.loginPw.value.trim();
+		if (form.loginPw.value.length == 0) {
+			alert('비밀번호를 입력해주세요');
+			form.loginPw.focus();
+			return;
+		}
+		
 		form.loginPw.value = form.loginPw.value.trim();
 		if (form.loginPwConfirm.value.length > 0) {
 			
@@ -29,18 +42,7 @@
 				return;
 			}
 		}
-		form.loginId.value = form.loginId.value.trim();
-		if (form.loginId.value.length == 0) {
-			alert('아이디를 입력해주세요');
-			form.loginId.focus();
-			return;
-		}
-		form.loginPw.value = form.loginPw.value.trim();
-		if (form.loginPw.value.length == 0) {
-			alert('비밀번호를 입력해주세요');
-			form.loginPw.focus();
-			return;
-		}
+		
 		form.name.value = form.name.value.trim();
 		if (form.name.value.length == 0) {
 			alert('이름을 입력해주세요');
@@ -68,9 +70,7 @@
 			return;
 		}
 		
-
-		 
-		MemberModify__submitDone = true;
+		MemberJoin__submitDone = true;
 		form.submit();
 	}
 </script>
@@ -123,7 +123,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="container mx-auto btns flex justify-end">
+			<div class="container mx-auto btns flex justify-end my-3">
 				<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
 			</div>
 		</form>

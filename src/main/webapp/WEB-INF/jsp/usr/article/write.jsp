@@ -43,6 +43,7 @@
 		<form class="table-box-type-1 overflow-x-auto" method="POST" action="../article/doWrite"
 			onsubmit="submitWriteForm(this); return false;">
   			<input type="hidden" name="body">
+  			<input type="hidden" name="replaceUri" value="${param.replaceUri }" />
 			  <table class="table table-compact w-full">
 				<colgroup>
 					<col width="200" />
@@ -91,9 +92,11 @@
 				</tbody>
 			</table>
 		</form>
-		<div class="btns flex justify-end">
-			<button class="btn-text-link btn btn-outline btn-sm" type="button" onclick="history.back();">뒤로가기</button>
+		
+		<div class="btns flex justify-end my-3">
+		<a class="btn-text-link btn btn-outline btn-sm" href="${param.replaceUri }">뒤로가기</a>
 		</div>
+		
 	</div>
 </section>
 <%@ include file="../common/foot.jspf"%>

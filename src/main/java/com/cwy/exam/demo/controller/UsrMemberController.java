@@ -27,33 +27,36 @@ public class UsrMemberController {
 			String email, @RequestParam(defaultValue = "/") String afterLoginUri) {
 
 		if (Ut.empty(loginId)) {
-			return  Ut.jsHistoryBack("아이디를 입력해주세요");
+			return rq.jsHistoryBack("F-1", "아이디를 입력해주세요");
 		}
 		if (Ut.empty(loginPw)) {
-			return  Ut.jsHistoryBack("비밀번호를 입력해주세요");
+			return rq.jsHistoryBack("F-2", "비밀번호를 입력해주세요");
 		}
 		if (Ut.empty(name)) {
-			return  Ut.jsHistoryBack("이름을 입력해주세요");
+			return rq.jsHistoryBack("F-3", "이름을 입력해주세요");
 		}
 		if (Ut.empty(nickname)) {
-			return Ut.jsHistoryBack("닉네임을 입력해주세요");
+			return rq.jsHistoryBack("F-4", "닉네임을 입력해주세요");
 		}
 		if (Ut.empty(cellphoneNum)) {
-			return rq.jsHistoryBack("전화번호를 입력해주세요");
+			return rq.jsHistoryBack("F-5", "전화번호를 입력해주세요");
 		}
 		if (Ut.empty(email)) {
-			return  Ut.jsHistoryBack("이메일을 입력해주세요");
+			return rq.jsHistoryBack("F-6", "이메일을 입력해주세요");
 		}
 
 		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
 
-//		if (joinRd.isFail()) {
-//			return  joinRd;
-//		}
+		if (joinRd.isFail()) {
+			return  rq.jsHistoryBack(joinRd.getResultCode(), joinRd.getMsg());
+		}
 
 		Member member = memberService.getMemberById(joinRd.getData1());
+		
+		String afterJoinUri = "../member/login?afterLoginUri=" + Ut.getUriEncoded(afterLoginUri);
 
-		return Ut.jsReplace(Ut.f(" 환영합니다, %s님 !! :) ", member.getName()), afterLoginUri);
+//		return Ut.jsReplace(Ut.f(" 환영합니다, %s님 !! :) ", member.getName()), afterJoinUri);
+		return rq.jsReplace(Ut.f("%s님 !! 회원가입이 완료되었습니다~ 로그인 후 이용해주세요 :)", member.getName()), afterJoinUri);
 	}
 	
 	@RequestMapping("usr/member/join")

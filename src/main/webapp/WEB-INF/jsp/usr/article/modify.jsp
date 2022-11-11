@@ -83,7 +83,7 @@ function ArticleModify__submit(form) {
 					</tr>
 					<tr>
 						<th class="text-indigo-700"></th>
-						<td><button class="btn btn-text-link btn-sm btn-ghost" type="submit" value="수정">수정</button></td>
+						<td><button class="btn btn-text-link btn-sm btn-ghost" type="submit" value="수정"> 수정 </button></td>
 					</tr>
 				</tbody>
 

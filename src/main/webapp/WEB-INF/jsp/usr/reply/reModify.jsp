@@ -86,9 +86,8 @@
 
 			</table>
 		</form>
-
-		<div class="btns justify-end flex">
-			<a class="btn-text-link btn btn-active btn-ghost btn-sm my-1" href="${param.replaceUri }">뒤로가기</a>
+		<div class="btns justify-end flex my-3">
+			<a class="btn-text-link btn btn-active btn-ghost btn-sm my-1" href="${param.replceUri }">뒤로가기</a>
 		</div>
 	</div>
 </section>

@@ -63,10 +63,10 @@ public class UsrMemberController {
 		return "usr/member/join";
 	}
 	
-	// id 중복검사
-	@RequestMapping("usr/member/getLoginIdDup")
+	// 회원가입시 id 중복검사
+	@RequestMapping("usr/member/doCheckLoginId")
 	@ResponseBody
-	public ResultData getLoginIdDup(String loginId) {
+	public ResultData doCheckLoginId(String loginId) {
 
 		if (Ut.empty(loginId)) {
 			return ResultData.from("F-A1", "아이디를 입력해주세요");
@@ -137,6 +137,7 @@ public class UsrMemberController {
 		return "usr/member/myPage";
 	}
 	
+	//	회원가입시 비밀번호 확인
 	@RequestMapping("usr/member/checkPassword")
 	public String showCheckPassword() {
 
@@ -193,7 +194,6 @@ public class UsrMemberController {
 			return rq.jsHistoryBack("!! 회원 수정 인증코드가 필요합니다. !!");
 		}
 		
-
 		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
 				memberModifyAuthKey);
 
@@ -219,4 +219,11 @@ public class UsrMemberController {
 		return Ut.jsReplace(modifyMyInfoRd.getMsg(), "/");
 		
 	}
+	
+	@RequestMapping("usr/member/showAdminPage")
+	public String showAdminPage(String loginId, String loginPw) {
+		
+		return "usr/member/adminPage";
+	}
+	
 }

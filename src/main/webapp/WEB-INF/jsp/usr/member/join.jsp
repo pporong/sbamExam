@@ -6,7 +6,6 @@
 
 <script>
 	let MemberJoin__submitDone = false;
-	
 	let validLoginId = "";
 	
 	function MemberJoin__submit(form) {
@@ -90,8 +89,15 @@
 		form.submit();
 	}
 	
+	let callCount = 0;
+	// lodash debounced 활용하여 loginId 중복체크시 일정시간(1초) 뒤에 한번만 실행할 수 있도록
+	// 너무 많은 함수가 전달되지 않도록 조절
+	const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 1000)
+	
 	function checkLoginIdDup(el) {
-
+		console.log('checkLoginIdDup called : ' + ++callCount);
+		console.log(el.value)
+		
 		const form = $(el).closest('form').get(0);
 		
 		if (form.loginId.value.length == 0) {
@@ -104,7 +110,7 @@
 		
 		$('.loginIdMsg').html('<div class="mt-2">확인중...</div>');
 		
-		$.get('../member/getLoginIdDup', {
+		$.get('../member/doCheckLoginId', {
 			isAjax : 'Y',
 			loginId : form.loginId.value
 		}, function(data) {
@@ -176,7 +182,7 @@
 					<tr class="hover">
 						<th>▶ 아이디 </th>
 						<td>
-							<input class="w-96 inputLoginId" name="loginId" type="text" placeholder="아이디를 입력 해 주세요." onkeyup="checkLoginIdDup(this);" autocomplete="off"/>
+							<input class="w-96 inputLoginId" name="loginId" type="text" placeholder="아이디를 입력 해 주세요." onkeyup="debounced(this);" autocomplete="off"/>
 							<div class="loginIdMsg"></div>
 						</td>
 					</tr>	

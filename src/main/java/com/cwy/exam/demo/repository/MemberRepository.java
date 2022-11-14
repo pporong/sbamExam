@@ -96,4 +96,5 @@ public interface MemberRepository {
 			</script>
 								""")
 	Member getArticleByMemberId();
+
 }

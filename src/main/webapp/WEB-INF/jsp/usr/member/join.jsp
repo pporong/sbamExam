@@ -7,6 +7,8 @@
 <script>
 	let MemberJoin__submitDone = false;
 	
+	let validLoginId = "";
+	
 	function MemberJoin__submit(form) {
 		
 		if (MemberJoin__submitDone) {
@@ -23,7 +25,15 @@
 			alert('아이디를 입력해주세요');
 			form.loginId.focus();
 			return;
+		}		
+		
+		if (form.loginId.value != validLoginId) {
+			alert('!! 사용할 수 없는 아이디입니다. !!');
+			form.loginId.focus();
+			return;
 		}
+		
+		let validLoginId = "";
 		form.loginPw.value = form.loginPw.value.trim();
 		if (form.loginPw.value.length == 0) {
 			alert('비밀번호를 입력해주세요');
@@ -79,6 +89,78 @@
 		MemberJoin__submitDone = true;
 		form.submit();
 	}
+	
+	function checkLoginIdDup(el) {
+
+		const form = $(el).closest('form').get(0);
+		
+		if (form.loginId.value.length == 0) {
+			validLoginId = '';
+			return;
+		}
+		if (validLoginId == form.loginId.value) {
+			return;
+		}
+		
+		$('.loginIdMsg').html('<div class="mt-2">확인중...</div>');
+		
+		$.get('../member/getLoginIdDup', {
+			isAjax : 'Y',
+			loginId : form.loginId.value
+		}, function(data) {
+			$('.loginIdMsg').html('<div class="mt-2">' + data.msg + '</div>');
+
+			$('.loginIdMsg, .inputLoginId').addClass('has-fail');
+			$('.loginIdMsg, .inputLoginId').removeClass('has-success');
+			
+			if (data.success) {
+				validLoginId = data.data1;
+				$('.loginIdMsg, .inputLoginId').addClass('has-success');
+				$('.loginIdMsg, .inputLoginId').removeClass('has-fail');
+				
+			} else {
+				validLoginId = '';
+			}
+		}, 'json');
+	}
+</script>
+
+<script>
+/* 	// id 중복체크
+	let validLoginId = "";
+	
+	function doLoginIdCheck(el) {
+		$('.loginIdMsg').html
+		const form = $(el).closest('form').get(0);
+		
+		form.loginId.value = form.loginId.value.trim();
+		
+		if (form.loginId.value != validLoginId) {
+			alert('!! 사용 할 수 없는아이디 입니다. !!');
+			form.loginId.focus();
+			return;
+		} if(form.loginId.value.length == 0) {
+			validLoginId = '';
+			return;
+		}
+		
+		$.get('../member/doLoginIdCheck', {
+			isAjax : 'Y',
+			loginId : form.loginId.value
+		}, function(data) {
+			$('.loginIdMsg').html('<div class="mt-2">' + data.msg + '</div>');
+			if (data.success) {
+				$('.loginIdMsg').addClass('has-success');
+				$(".loginIdMsg").removeClass("has-fail")
+				validLoginId = data.data1
+			} else {
+				validLoginId = '';
+				$('.loginIdMsg').addClass('has-fail');
+				$(".loginIdMsg").removeClass("has-success")
+			}
+		}, 'json');
+	} */
+
 </script>
 
 <section class="mt-8 text-xl">
@@ -93,7 +175,10 @@
 				<tbody>
 					<tr class="hover">
 						<th>▶ 아이디 </th>
-						<td><input class="w-96" name="loginId" type="text" placeholder="아이디를 입력 해 주세요." /></td>
+						<td>
+							<input class="w-96 inputLoginId" name="loginId" type="text" placeholder="아이디를 입력 해 주세요." onkeyup="checkLoginIdDup(this);" autocomplete="off"/>
+							<div class="loginIdMsg"></div>
+						</td>
 					</tr>	
 					<tr class="hover">
 						<th class="">▶ 비밀번호 </th>
@@ -119,13 +204,13 @@
 						<th class="">▶ 이메일 </th>
 						<td><input class="w-96" name="email" type="text" placeholder="이메일을 입력해주세요" /></td>
 					</tr>
-
+ 
 					<tr class="">
 						<th></th>
 						<td class="">
-							<button class="btn btn-ghost btn-sm btn-outline" 
-							onclick="if(confirm('입력 내용이 정확합니까?') == false) return false;" 
-							type="submit" value="회원 가입">회원 가입</button>
+							<button class="btn btn-ghost btn-sm btn-outline" type="submit" value="회원 가입">
+							<!-- onclick="if(confirm('입력 내용이 정확합니까?') == false) return false;"  -->
+							회원 가입</button>
 						</td>
 					</tr>
 				</tbody>

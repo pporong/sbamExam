@@ -55,7 +55,6 @@ public class UsrMemberController {
 		
 		String afterJoinUri = "../member/login?afterLoginUri=" + Ut.getUriEncoded(afterLoginUri);
 
-//		return Ut.jsReplace(Ut.f(" 환영합니다, %s님 !! :) ", member.getName()), afterJoinUri);
 		return rq.jsReplace(Ut.f("%s님 !! 회원가입이 완료되었습니다~ 로그인 후 이용해주세요 :)", member.getName()), afterJoinUri);
 	}
 	
@@ -63,7 +62,24 @@ public class UsrMemberController {
 	public String showJoin() {
 		return "usr/member/join";
 	}
+	
+	// id 중복검사
+	@RequestMapping("usr/member/getLoginIdDup")
+	@ResponseBody
+	public ResultData getLoginIdDup(String loginId) {
 
+		if (Ut.empty(loginId)) {
+			return ResultData.from("F-A1", "아이디를 입력해주세요");
+		}
+
+		Member oldMember = memberService.getMemberByLoginId(loginId);
+
+		if (oldMember != null) {
+			return ResultData.from("F-A2", "이미 존재하는 아이디 입니다.", "logindId", loginId);
+		}
+
+		return ResultData.from("S-A1", "사용 가능한 아이디 입니다.", "logindId", loginId);
+	}
 	
 	// login
 	@RequestMapping("usr/member/login")
@@ -122,7 +138,7 @@ public class UsrMemberController {
 	}
 	
 	@RequestMapping("usr/member/checkPassword")
-	public String shoWCheckPassword() {
+	public String showCheckPassword() {
 
 		return "usr/member/checkPassword";
 	}

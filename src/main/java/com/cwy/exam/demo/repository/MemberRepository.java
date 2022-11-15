@@ -1,12 +1,13 @@
 package com.cwy.exam.demo.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.cwy.exam.demo.vo.Member;
-import com.cwy.exam.demo.vo.Reply;
 
 @Mapper
 public interface MemberRepository {
@@ -62,6 +63,14 @@ public interface MemberRepository {
 				WHERE M.id = #{id}
 								""")
 	public Member getForPrintMember(int id);
+	
+	@Select("""
+			SELECT M.*, M.name AS extra__WriterName
+			FROM `member` AS M
+			LEFT JOIN article AS A
+			ON M.id = A.memberId = M.id
+							""")
+	public List<Member> getForPrintMembers();
 	
 	@Update("""
 			<script>

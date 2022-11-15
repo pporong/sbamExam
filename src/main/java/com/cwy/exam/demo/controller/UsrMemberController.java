@@ -1,7 +1,10 @@
 package com.cwy.exam.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -220,8 +223,12 @@ public class UsrMemberController {
 		
 	}
 	
-	@RequestMapping("usr/member/showAdminPage")
-	public String showAdminPage() {
+	@RequestMapping("usr/member/adminPage")
+	public String showAdminPage(Model model) {
+		
+		List<Member> members = memberService.getForPrintMembers();
+		
+		model.addAttribute("members", members);
 		
 		return "usr/member/adminPage";
 	}

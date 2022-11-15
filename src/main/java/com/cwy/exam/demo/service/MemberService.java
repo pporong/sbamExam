@@ -1,5 +1,7 @@
 package com.cwy.exam.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.cwy.exam.demo.repository.MemberRepository;
@@ -87,6 +89,13 @@ public class MemberService {
 		}
 
 		return ResultData.from("S-1", "정상 코드입니다");
+	}
+	
+	public List<Member> getForPrintMembers(){
+		
+		List<Member> members = memberRepository.getForPrintMembers();
+		
+		return members;
 	}
 
 }

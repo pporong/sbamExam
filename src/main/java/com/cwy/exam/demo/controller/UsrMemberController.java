@@ -221,7 +221,7 @@ public class UsrMemberController {
 	}
 	
 	@RequestMapping("usr/member/showAdminPage")
-	public String showAdminPage(String loginId, String loginPw) {
+	public String showAdminPage() {
 		
 		return "usr/member/adminPage";
 	}

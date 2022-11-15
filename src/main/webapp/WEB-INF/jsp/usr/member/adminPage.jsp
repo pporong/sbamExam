@@ -7,40 +7,29 @@
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 			 <table class="table table-compact w-full center-box">
-				<colgroup>
-					<col width="200" />
-				</colgroup>
+				
+				<thead>
+					<tr class="text-indigo-700">
+						<th>회원목록</th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
 
 				<tbody>
-					<tr class="hover">
-						<th class=>▶ 아이디 </th>
-						<td>${rq.loginedMember.loginId }</td>
-					</tr>
-					<tr class="hover">
-						<th class="">▶ 가입 날짜</th>
-						<td>${rq.loginedMember.regDate }</td>
-					</tr>
-					<tr class="hover">
-						<th class="">▶ 이름</th>
-						<td>${rq.loginedMember.name }</td>
-					</tr>
-					<tr class="hover">
-						<th class="">▶ 닉네임</th>
-						<td>${rq.loginedMember.nickname }</td>
-					</tr>
-					<tr class="hover">
-						<th class="">▶ 전화 번호</th>
-						<td>${rq.loginedMember.cellphoneNum }</td>
-					</tr>
-					<tr class="hover">
-						<th class="">▶ 이메일</th>
-						<td>${rq.loginedMember.email }</td>
-					</tr>
-					<tr>
-						<th></th>
-						<td><a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modifyMyInfo') }" 
-						class="btn btn-outline btn-ghost btn-sm">회원 정보 수정</a></td>
-					</tr>
+					<c:forEach var="member" items="${members }">
+						<tr class="hover">
+							<td class="text-green-600">${member.id}</td>
+							<td>${article.forPrintType1RegDate}</td>
+							<td><a class="hover:underline" href="${rq.getArticleDetailUriFromArticleList(article) }">${article.title}</a></td>
+							<td>${article.extra__writerName}</td>
+							<td>${article.hitCount}</td>
+							<td>${article.goodReactionPoint}</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			<div class="container mx-auto btns flex justify-end my-3">

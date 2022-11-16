@@ -118,7 +118,7 @@ body {
 /* 팝업 */
 .popUp {
 	font-size : 1.2rem;
-	
+	cursor: pointer;
 }
 .layer {
 	display: none;

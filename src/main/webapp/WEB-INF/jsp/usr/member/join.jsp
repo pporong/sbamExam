@@ -90,9 +90,10 @@
 	}
 	
 	let callCount = 0;
+	
 	// lodash debounced 활용하여 loginId 중복체크시 일정시간(1초) 뒤에 한번만 실행할 수 있도록
 	// 너무 많은 함수가 전달되지 않도록 조절
-	const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 1000)
+	const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 1000);
 	
 	function checkLoginIdDup(el) {
 		console.log('checkLoginIdDup called : ' + ++callCount);
@@ -126,48 +127,14 @@
 				
 			} else {
 				validLoginId = '';
+			} if (data.resultCode == 'F-B'){
+				alert(data.msg);
+				location.replace('/');
 			}
 		}, 'json');
 	}
 </script>
 
-<script>
-/* 	// id 중복체크
-	let validLoginId = "";
-	
-	function doLoginIdCheck(el) {
-		$('.loginIdMsg').html
-		const form = $(el).closest('form').get(0);
-		
-		form.loginId.value = form.loginId.value.trim();
-		
-		if (form.loginId.value != validLoginId) {
-			alert('!! 사용 할 수 없는아이디 입니다. !!');
-			form.loginId.focus();
-			return;
-		} if(form.loginId.value.length == 0) {
-			validLoginId = '';
-			return;
-		}
-		
-		$.get('../member/doLoginIdCheck', {
-			isAjax : 'Y',
-			loginId : form.loginId.value
-		}, function(data) {
-			$('.loginIdMsg').html('<div class="mt-2">' + data.msg + '</div>');
-			if (data.success) {
-				$('.loginIdMsg').addClass('has-success');
-				$(".loginIdMsg").removeClass("has-fail")
-				validLoginId = data.data1
-			} else {
-				validLoginId = '';
-				$('.loginIdMsg').addClass('has-fail');
-				$(".loginIdMsg").removeClass("has-success")
-			}
-		}, 'json');
-	} */
-
-</script>
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
@@ -182,7 +149,7 @@
 					<tr class="hover">
 						<th>▶ 아이디 </th>
 						<td>
-							<input class="w-96 inputLoginId" name="loginId" type="text" placeholder="아이디를 입력 해 주세요." onkeyup="debounced(this);" autocomplete="off"/>
+							<input class="w-96 inputLoginId" name="loginId" type="text" placeholder="아이디를 입력 해 주세요." onkeyup="checkLoginIdDupDebounced(this);" autocomplete="off"/>
 							<div class="loginIdMsg"></div>
 						</td>
 					</tr>	

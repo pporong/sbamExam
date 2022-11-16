@@ -37,7 +37,11 @@
 		</div>
 
 		
-		<button class="close-btn p-5">닫기</button>
+		<button class="close-btn p-5">닫기</button>	    		
 	</div>
 </div>
+
+	<input id="cb3" class="tgl tgl-skewed" type="checkbox" />
+	<label for="cb3" data-tg-off = "OFF" data-tg-on = "ON"></label>
+	
 <%@ include file="../common/foot.jspf"%>

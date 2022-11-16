@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="ADMIN" />
+<c:set var="pageTitle" value="ADMIN > member list" />
 <%@ include file="../common/head.jspf"%>
 <%@ page import="com.cwy.exam.demo.util.Ut"%>
 

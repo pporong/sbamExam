@@ -7,7 +7,6 @@ import com.cwy.exam.demo.vo.Rq;
 
 @Controller
 public class UsrHomeController {
-	
 	private Rq rq;
 	
 	public UsrHomeController(Rq rq) {

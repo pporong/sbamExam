@@ -18,6 +18,26 @@
 			</div>
 
 		만반잘부 ~!
+		
+		<span class="popUp text-red-500 mt-4">
+			팝업 예시	
+		</span>
 	</div>
+
 </section>
+
+<div class="layer-bg">
+	<div class="layer">
+		<h3 class="text-yellow-400 p-5">POPUP</h3>
+		<div class="p-5">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+			Velit deleniti dolores error earum recusandae asperiores doloribus eos
+			sit voluptates excepturi atque quidem reprehenderit repellat accusantium
+			commodi nulla eligendi perspiciatis reiciendis.
+		</div>
+
+		
+		<button class="close-btn p-5">닫기</button>
+	</div>
+</div>
 <%@ include file="../common/foot.jspf"%>

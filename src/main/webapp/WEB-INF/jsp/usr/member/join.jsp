@@ -88,7 +88,7 @@
 		MemberJoin__submitDone = true;
 		form.submit();
 	}
-	
+	// 몇번요청했는지 count
 	let callCount = 0;
 	
 	// lodash debounced 활용하여 loginId 중복체크시 일정시간(1초) 뒤에 한번만 실행할 수 있도록
@@ -127,7 +127,9 @@
 				
 			} else {
 				validLoginId = '';
-			} if (data.resultCode == 'F-B'){
+			} 
+			// ajax 요청 확인하여 올바른 액션 취하기
+			if (data.resultCode == 'F-B'){
 				alert(data.msg);
 				location.replace('/');
 			}

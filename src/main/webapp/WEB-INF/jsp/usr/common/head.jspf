@@ -86,7 +86,7 @@
 				</c:if>
 				<c:if test="${rq.logined}">
 					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="/usr/member/adminPage">
+						<a class="h-full px-3 flex items-center" href="/adm/member/adminPage">
 							<span>ADMIN PAGE</span>
 						</a>
 					</li>

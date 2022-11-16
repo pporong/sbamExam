@@ -16,7 +16,7 @@ import com.cwy.exam.demo.vo.ResultData;
 import com.cwy.exam.demo.vo.Rq;
 
 @Controller
-public class UsrMemberController {
+public class AdmMemberController {
 
 	@Autowired
 	private MemberService memberService;
@@ -24,7 +24,7 @@ public class UsrMemberController {
 	private Rq rq;
 
 	// join
-	@RequestMapping("usr/member/doJoin")
+	@RequestMapping("adm/member/doJoin")
 	@ResponseBody
 	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
 			String email, @RequestParam(defaultValue = "/") String afterLoginUri) {
@@ -61,13 +61,13 @@ public class UsrMemberController {
 		return rq.jsReplace(Ut.f("%s님 !! 회원가입이 완료되었습니다~ 로그인 후 이용해주세요 :)", member.getName()), afterJoinUri);
 	}
 	
-	@RequestMapping("usr/member/join")
+	@RequestMapping("adm/member/join")
 	public String showJoin() {
 		return "usr/member/join";
 	}
 	
 	// 회원가입시 id 중복검사
-	@RequestMapping("usr/member/doCheckLoginId")
+	@RequestMapping("adm/member/doCheckLoginId")
 	@ResponseBody
 	public ResultData doCheckLoginId(String loginId) {
 
@@ -85,12 +85,12 @@ public class UsrMemberController {
 	}
 	
 	// login
-	@RequestMapping("usr/member/login")
+	@RequestMapping("adm/member/login")
 	public String showLogin() {
 		return "usr/member/login";
 	}
 
-	@RequestMapping("usr/member/doLogin")
+	@RequestMapping("adm/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
 
@@ -121,7 +121,7 @@ public class UsrMemberController {
 		return Ut.jsReplace(Ut.f("%s님 환영합니다", member.getNickname()), afterLoginUri);
 	}
 
-	@RequestMapping("usr/member/doLogout")
+	@RequestMapping("adm/member/doLogout")
 	@ResponseBody
 	public String doLogout(@RequestParam(defaultValue = "/") String afterLogoutUri) {
 
@@ -134,20 +134,20 @@ public class UsrMemberController {
 		return Ut.jsReplace("로그아웃 되었습니다", afterLogoutUri);
 	}
 	
-	@RequestMapping("usr/member/myPage")
+	@RequestMapping("adm/member/myPage")
 	public String showMyPage() {
 
 		return "usr/member/myPage";
 	}
 	
 	//	회원가입시 비밀번호 확인
-	@RequestMapping("usr/member/checkPassword")
+	@RequestMapping("adm/member/checkPassword")
 	public String showCheckPassword() {
 
 		return "usr/member/checkPassword";
 	}
 
-	@RequestMapping("usr/member/doCheckPw")
+	@RequestMapping("adm/member/doCheckPw")
 	@ResponseBody
 	public String doCheckPw(String loginPw, String replaceUri) {
 		
@@ -170,7 +170,7 @@ public class UsrMemberController {
 		return rq.jsReplace("", replaceUri);
 	}
 	
-	@RequestMapping("usr/member/modifyMyInfo")
+	@RequestMapping("adm/member/modifyMyInfo")
 	public String modifyMyInfo(String memberModifyAuthKey) {
 		
 		if (Ut.empty(memberModifyAuthKey)) {
@@ -189,7 +189,7 @@ public class UsrMemberController {
 	}
 	
 	// 개인정보수정
-	@RequestMapping("usr/member/doModifyMyInfo")
+	@RequestMapping("adm/member/doModifyMyInfo")
 	@ResponseBody
 	public String doModifyMyInfo(String memberModifyAuthKey, String loginPw, String nickname, String cellphoneNum, String email) {
 
@@ -221,6 +221,16 @@ public class UsrMemberController {
 
 		return Ut.jsReplace(modifyMyInfoRd.getMsg(), "/");
 		
+	}
+	
+	@RequestMapping("adm/member/adminPage")
+	public String showAdminPage(Model model) {
+		
+		List<Member> members = memberService.getForPrintMembers();
+		
+		model.addAttribute("members", members);
+		
+		return "usr/member/adminPage";
 	}
 	
 }

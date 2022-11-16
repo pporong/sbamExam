@@ -32,6 +32,7 @@ public interface MemberRepository {
 				SELECT *
 				FROM `member` AS M
 				WHERE M.id = #{id}
+				AND delStatus = 0
 								""")
 	Member getMemberById(int id);
 
@@ -39,7 +40,8 @@ public interface MemberRepository {
 				SELECT *
 				FROM `member` AS M
 				WHERE M.loginId = #{loginId}
-											""")
+				AND delStatus = 0
+							""")
 	Member getMemberByLoginId(String loginId);
 
 	@Select("""

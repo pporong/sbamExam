@@ -19,12 +19,16 @@
 
 		만반잘부 ~!
 		
-		<span class="popUp text-red-500 mt-4">
-			팝업 예시	
-		</span>
-	</div>
-
+		<!-- 토글버튼 -->
+		<div class="flex justify-end">
+			<input class="tgl tgl-skewed" id="cb3" type="checkbox" />
+			<label class="tgl-btn" data-tg-dark="DARK" data-tg-light="LIGHT" for="cb3"></label>
+		</div>
+		
+		</div>
+		
 </section>
+<!-- <span class="popUp text-red-500 mt-4"> 팝업 예시 </span>
 
 <div class="layer-bg">
 	<div class="layer">
@@ -35,13 +39,10 @@
 			sit voluptates excepturi atque quidem reprehenderit repellat accusantium
 			commodi nulla eligendi perspiciatis reiciendis.
 		</div>
-
 		
 		<button class="close-btn p-5">닫기</button>	    		
 	</div>
-</div>
+</div>  -->
 
-	<input id="cb3" class="tgl tgl-skewed" type="checkbox" />
-	<label for="cb3" data-tg-off = "OFF" data-tg-on = "ON"></label>
 	
 <%@ include file="../common/foot.jspf"%>

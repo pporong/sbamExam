@@ -44,6 +44,7 @@ public class AdmMemberController {
 		model.addAttribute("membersCount", membersCount);
 		model.addAttribute("members", members);
         
+		
 		return "adm/member/list";
 	}
 	

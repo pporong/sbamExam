@@ -18,7 +18,7 @@
 						<tr>							
 							<td>
 								<select class="text-center" name="authLevel" data-value="${authLevel}">
-									<option value="disabled">검색 타입</option>
+									<option value="0">검색 타입</option>
 									<option value="3">일 반 회 원</option>
 									<option value="7">관 리 자</option>
 	 								<option value="0">전 체 회 원</option>
@@ -27,9 +27,9 @@
 							<td>
 							    <select data-value="${param.searchKeywordTypeCode}" name="searchKeywordTypeCode"class="text-center">
 							        <option value="disabled">검색 타입</option>
-									<option value="loginId"> 아이디</option>
-									<option value="name"> 이름 </option>
-									<option value="nickname"> 닉네임 </option>
+									<option value="loginId">아이디</option>
+									<option value="name">이름</option>
+									<option value="nickname">닉네임</option>
 									<option value="loginId,name,nickname">전부 포함</option>
       							</select>
 							</td>
@@ -69,7 +69,6 @@
 	
 				<tbody>
 					<c:forEach var="member" items="${members}">
-						<tr class="hover">
 							<td class="text-green-600">${member.id}</td>
 							<td>${member.forPrintType1RegDate}</td>
 							<td>${member.forPrintType1UpdateDate}</td>
@@ -77,7 +76,6 @@
 							<td class="">${member.authLevel}</td>
 							<td>${member.name}</td>
 							<td>${member.nickname}</td>
-						</tr>
 					</c:forEach>
 				</tbody>
 			</table>

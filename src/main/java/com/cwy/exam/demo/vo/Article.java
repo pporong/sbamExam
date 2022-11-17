@@ -27,6 +27,15 @@ public class Article {
 	public String getForPrintType1RegDate() {
 		return regDate.substring(2, 16).replace(" ", " ");
 	}
+	public String getForPrintType1updateDate() {
+		return regDate.substring(2, 16).replace(" ", " ");
+	}
+	public String getForPrintType2RegDate() {
+		return regDate.substring(2, 16).replace(" ", "<br>");
+	}
+	public String getForPrintType2updateDate() {
+		return regDate.substring(2, 16).replace(" ", "<br>");
+	}
 
 	public String getForPrintBody() {
 		return body.replaceAll("\n", "<br>");

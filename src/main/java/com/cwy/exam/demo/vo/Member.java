@@ -21,4 +21,17 @@ public class Member {
 	private boolean delStatus;
 	private String delDate;
 
+	public String getForPrintType1RegDate() {
+		return regDate.substring(2, 16).replace(" ", " ");
+	}
+	public String getForPrintType1updateDate() {
+		return updateDate.substring(2, 16).replace(" ", " ");
+	}
+	public String getForPrintType2RegDate() {
+		return regDate.substring(2, 16).replace(" ", "<br>");
+	}
+	public String getForPrintType2updateDate() {
+		return updateDate.substring(2, 16).replace(" ", "<br>");
+	}
+
 }

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>${pageTitle }</title>
+
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
@@ -58,46 +59,7 @@
 						<span>FREE</span>
 					</a>
 				</li>
-				<li class="hover:underline">
-					<a class="h-full px-3 flex items-center" href="/usr/article/write">
-						<span>WRITE</span>
-					</a>
-				</li>
-				<c:if test="${!rq.logined}">
-					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="${rq.joinUri }">
-							<span>JOIN</span>
-						</a>
-					</li>
-				</c:if>
-				<c:if test="${!rq.logined}">
-					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="${rq.loginUri}">
-							<span>LOGIN</span>
-						</a>
-					</li>
-				</c:if>
-				<c:if test="${rq.logined}">
-					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="/usr/member/myPage">
-							<span>MY PAGE</span>
-						</a>
-					</li>
-					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" onclick="if(confirm('정말 로그아웃하시겠습니까?') == false) return false;"  href="${rq.logoutUri}">
-							<span>LOGOUT</span>
-						</a>
-					</li>
-				</c:if>
 
 			</ul>
 		</div>
 	</header>
-
-	<section class="my-3 text-2xl">
-		<div class="container mx-auto px-3">
-			<h1>${pageTitle }&nbsp;PAGE</h1>
-		</div>
-	</section>
-	
-	<main>

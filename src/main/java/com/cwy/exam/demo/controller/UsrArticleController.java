@@ -88,10 +88,10 @@ public class UsrArticleController {
 		model.addAttribute("board", board);
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("page", page);
-		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("pagesCount", pagesCount);
 		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("articles", articles);
+		model.addAttribute("articlesCount", articlesCount);
         
 
 		return "usr/article/list";

@@ -90,13 +90,21 @@ public class MemberService {
 
 		return ResultData.from("S-1", "정상 코드입니다");
 	}
-	
-	public List<Member> getForPrintMembers(){
-		
-		List<Member> members = memberRepository.getForPrintMembers();
-		
+
+	public int getMembersCount(int authLevel, String searchKeywordTypeCode, String searchKeyword) {
+		return memberRepository.getMembersCount(authLevel, searchKeywordTypeCode, searchKeyword);
+	}
+
+	public List<Member> getForPrintMembers(int authLevel, String searchKeywordTypeCode, String searchKeyword,
+			int itemsInAPage, int page) {
+
+		int limitStart = (page - 1) * itemsInAPage;
+		int limitTake = itemsInAPage;
+
+		List<Member> members = memberRepository.getForPrintMembers(authLevel, searchKeywordTypeCode, searchKeyword,
+				limitStart, limitTake);
+
 		return members;
 	}
 
 }
-

@@ -25,13 +25,13 @@
 								</select>
 							</td>
 							<td>
-							    <select data-value="${param.searchKeywordTypeCode}" name="searchKeywordTypeCode"class="text-center">
-							        <option value="disabled">검색 타입</option>
+ 							    <select data-value="${param.searchKeywordTypeCode}" name="searchKeywordTypeCode" class="text-center">
+							        <option disabled="disabled">검색 타입</option>
 									<option value="loginId">아이디</option>
 									<option value="name">이름</option>
 									<option value="nickname">닉네임</option>
 									<option value="loginId,name,nickname">전부 포함</option>
-      							</select>
+      							</select> 
 							</td>
 							
 								<td><input class="text-center" type="text" placeholder="검색어 입력" name="searchKeyword" maxlength="30" value="${param.searchKeyword}"></td>
@@ -69,13 +69,15 @@
 	
 				<tbody>
 					<c:forEach var="member" items="${members}">
-							<td class="text-green-600">${member.id}</td>
-							<td>${member.forPrintType1RegDate}</td>
-							<td>${member.forPrintType1UpdateDate}</td>
-							<td>${member.loginId}</td>
-							<td class="">${member.authLevel}</td>
-							<td>${member.name}</td>
-							<td>${member.nickname}</td>
+					<tr class="hover">
+						<td class="text-green-600">${member.id}</td>
+						<td>${member.forPrintType1RegDate}</td>
+						<td>${member.forPrintType1updateDate}</td>
+						<td>${member.loginId}</td>
+						<td class="">${member.authLevel}</td>
+						<td>${member.name}</td>
+						<td>${member.nickname}</td>
+						<tr>
 					</c:forEach>
 				</tbody>
 			</table>

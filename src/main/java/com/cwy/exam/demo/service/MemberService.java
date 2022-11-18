@@ -60,6 +60,8 @@ public class MemberService {
 
 	public ResultData modifyMyInfo(int id, String loginPw, String nickname, String cellphoneNum, String email) {
 
+		loginPw = Ut.sha256(loginPw);
+		
 		memberRepository.modifyMyInfo(id, loginPw, nickname, cellphoneNum, email);
 
 		return ResultData.from("S-1", "회원 정보 변경 성공!");

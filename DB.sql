@@ -56,7 +56,7 @@ SET regDate = NOW(),
     `name` = '김관리',
     nickname = '관리자',
     cellphoneNum = '010-0000-0000',
-    email = 'inane09@gmail.com';
+    email = 'ppoemong@gmail.com';
     
 # 멤버 데이터 생성 (일반)
 INSERT INTO `member`
@@ -67,7 +67,7 @@ SET regDate = NOW(),
     `name` = '김회원',
     nickname = '사용자1',
     cellphoneNum = '010-1234-5678',
-    email = 'inane09@gmail.com';
+    email = 'ppoemong@gmail.com';
     
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -77,7 +77,7 @@ SET regDate = NOW(),
     `name` = '최회원',
     nickname = '사용자2',
     cellphoneNum = '010-5678-1234',
-    email = 'inane09@gmail.com';
+    email = 'ppoemong@gmail.com';
     
 
 # 게시물 테이블에 회원번호 칼럼 추가
